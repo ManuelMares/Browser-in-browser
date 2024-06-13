@@ -1,0 +1,107 @@
+{ 
+    "google.com/maps/":{
+        "topMargin": [],
+        "shrinkAndTranslate_porcentage": ["#app-container"],
+        "shrinkAndTranslate_vh": [],
+        "translate": [], 
+        "updated": false
+    },
+    "google.com/":{
+        "topMargin": ["#searchform", ".Lj9fsd,DU1Mzb"],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": ["#main", ".T1diZc,KWE8qe"],
+        "updated": true
+    },
+    "https://music.youtube.com/":{
+        "topMargin": [],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": ["body"],
+        "translate": [],
+        "updated": true
+    },
+    "studio.youtube.com/":{
+        "topMargin": [],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": ["body"],
+        "translate": [],
+        "updated": true
+    },
+    "youtube.com/":{
+        "topMargin": [],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": ["#content"],
+        "updated": true
+    },
+    "twitter.com":{
+        "topMargin": [".css-1dbjc4n.r-1awozwy.r-aqfbo4.r-14lw9ot.r-18u37iz.r-1h3ijdo.r-6gpygo.r-15ysp7h.r-1xcajam.r-ipm5af.r-1hycxz.r-136ojw6", ".css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x"],
+        "shrinkAndTranslate_porcentage": [".css-1dbjc4n.r-1pi2tsx.r-1wtj0ep.r-1rnoaur.r-1e081e0.r-o96wvk"],
+        "shrinkAndTranslate_vh": [],
+        "translate": [".css-1dbjc4n.r-14lw9ot.r-jxzhtn.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-11wrixw.r-61z16t.r-1ye8kvj.r-13qz1uu.r-184en5c"],
+        "updated": true
+    },
+    "facebook.com":{
+        "topMargin": ["body", ".x6s0dn4.x9f619.x78zum5.x1iyjqo2.x1s65kcs.x1d52u69.xixxii4.x17qophe.x13vifvy.xzkaem6", ".x9f619.x1s65kcs.x16xn7b0.xixxii4.x17qophe.x13vifvy.xj35x94.xhtitgo.xmy5rp", ".xds687c.xixxii4.x17qophe.x13vifvy.x1vjfegm", ".xds687c.x1pi30zi.x1e558r4.xixxii4.x13vifvy.xzkaem6"],
+        "shrinkAndTranslate_porcentage": [".css-1dbjc4n.r-1pi2tsx.r-1wtj0ep.r-1rnoaur.r-1e081e0.r-o96wvk"],
+        "shrinkAndTranslate_vh": [],
+        "translate": [".css-1dbjc4n.r-14lw9ot.r-jxzhtn.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-11wrixw.r-61z16t.r-1ye8kvj.r-13qz1uu.r-184en5c"],
+        "updated": true
+    },
+    "https://stackoverflow.com/":{
+        "topMargin":[".container", ".site-header", ".sm:d-none,py24,bg-black-750,fc-black-200 ps-relative,js-dismissable-hero"],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": [".s-topbar,ps-fixed,t0,l0,js-top-bar"],
+        "updated": true
+    },
+    "stackexchange.com/":{
+        "topMargin": [".container", ".site-header", ".sm:d-none,py24,bg-black-750,fc-black-200,ps-relative,js-dismissable-hero"],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": [".s-topbar,ps-fixed,t0,l0,js-top-bar"],
+        "updated": true
+    },
+    "similarweb.com/":{
+        "topMargin": [],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": [".app-layout--full-height"],
+        "updated": true
+    },
+    "baidu.com/":{
+        "topMargin": ["body"],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": [],
+        "updated": true
+    },
+    "wikipedia.org/wiki":{
+        "topMargin": [".vector-legacy-sidebar", "#mw-head", ".mw-body ve-init-mw-desktopArticleTarget-targetContainer"],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": [],
+        "updated": true
+    },
+    "wikipedia.org":{
+        "topMargin": ["body"],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": [],
+        "updated": true
+    },
+    "dzen.ru":{
+        "topMargin": ["body"],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": [".desktop-layout__leftColumn-25", ".channels-list-sidebar__container_sticky-1b", ".dzen-header-desktop__content-39"],
+        "updated": true
+    },
+    ".com":{
+        "topMargin": ["body"],
+        "shrinkAndTranslate_porcentage": [],
+        "shrinkAndTranslate_vh": [],
+        "translate": [],
+        "updated": true
+    }
+}

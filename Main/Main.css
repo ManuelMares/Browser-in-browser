@@ -1,0 +1,192 @@
+:root {
+  --barColor: #032548;
+  --barHeight: 5rem; /* change to px */
+  --barZIndex: 3000;
+}
+
+
+
+.topMargin{
+  margin-top: var(--barHeight) !important;
+}
+
+.shrinkAndTranslate_porcentage{  
+  transform: translateY(var(--barHeight))!important;
+  height: calc(100% - var(--barHeight)) !important;
+}
+.shrinkAndTranslate_vh{  
+  transform: translateY(var(--barHeight))!important;
+  height: calc(100vh - var(--barHeight)) !important;
+}
+
+.translate{
+  transform: translateY(var(--barHeight))!important;
+}
+ 
+
+
+
+
+
+
+
+.customBar{
+  position: fixed;
+  z-index: var(--barZIndex);
+  top: 0rem;
+
+  width: 100%;
+  height: var(--barHeight);
+
+  background-color: var(--barColor);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.links{
+  border-top: solid 2px;
+  border-color: rgb(112, 112, 112);
+  
+  width: 12rem;
+  height: 100%;
+  
+  display: flex;
+  direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  padding: 0.7rem 0.2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.body{
+display: flex;
+flex-direction: row;
+}
+
+
+.generalWrapperHigh {
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(255, 0, 242);
+}
+
+.generalWrapper{
+  display: flex;
+  flex-direction: row;
+
+  height: 3rem;
+  width: 100%;
+  justify-content: space-between;
+
+  background: black;
+}
+
+#browser-in-browser-browserbar1492 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(121, 22, 22, 0.767);
+  color: rgb(255, 255, 255);
+}
+
+.button {
+  background-color: blue;
+  position: flex;
+  width: 5px;
+  height: 5px;
+  font-size: 2px;
+  padding: 15px;
+  border-radius: 2px;
+  border: 3px solid yellow;
+  color: white;
+  cursor: default;
+}
+
+
+.textBar {
+  position: flex;
+  width: 40rem; 
+  height: 2rem;
+  border: 2px solid #000000;
+  border-radius: 1rem;
+  background-color: #202124;
+  cursor: text;
+}
+
+.buttonRight {
+background-color: red;
+position: flex;
+width: 5px;
+height: 5px;
+font-size: 2px;
+padding: 15px;
+border-radius: 2px;
+border: 3px solid yellow;
+color: white;
+cursor: default;
+right: 0px;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  padding: 0.2rem;
+}
+.containerThree {
+  display: flex;
+  flex-direction: row;
+  padding: 0.2rem;
+}
+
+.containerTwo{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: auto;
+  padding: 0.3rem;
+}
+
+.father{
+  display: flex;
+  flex-direction: column;
+}

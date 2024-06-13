@@ -1,0 +1,35 @@
+.bib_bar_MoreMenu_Container{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;    
+    width: 250px;
+    background-color: white;
+    height: auto;
+        
+    position: fixed;
+    top: 80px;
+    z-index: 5000;
+    right: 0;
+    box-shadow: 0px 0px 10px 1px rgb(107 106 106);
+    border-radius: 10px;
+}
+    .bib_bar_MoreMenu_OptionButton{
+        display: flex;
+        align-items: center;
+
+        border: none;
+        padding: 5px 0 5px 50px;
+        height: auto;
+        
+        background-color: rgba(255, 255, 255, 0);
+        color: black;
+
+        font-weight: 500;
+        font-size: 15px;
+    }
+        .bib_bar_MoreMenu_OptionButton:hover{
+            background-color: rgb(215, 215, 215);
+        }
+        .bib_bar_MoreMenu_OptionButton:active{
+            background-color: rgb(224, 222, 222);
+        }

@@ -1,0 +1,150 @@
+/*This file gives styles to both, activeTab and innactiveTab. 
+It is used in bar.html, put set dinamically through bar.js as the content of a script tag*/
+
+
+/*---------INNACTIVE TAB----------------*/
+.bib_Bar_TopContainer_Tabs_Tab{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    /* 
+        shrink: minimum, grow: max, basis: ideal 
+        using a number means it is proportional. That is
+            all the space will be divided in proportion
+            to the number indicating in each object.
+        making it equal to 0 means it will not change its size at all
+    */
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 200px;
+
+    border-radius: 10px 10px 0 0;
+    /*This overflow is just so the inner elements don't hide the rounded borders*/
+    overflow: hidden;
+    
+    height: 100%;
+}    
+.bib_Bar_TopContainer_Tabs_Tab:hover{
+    background-color: rgb(12, 132, 224);
+}   
+.bib_Bar_TopContainer_Tabs_Tab:active{
+    background-color: rgb(37, 146, 229);
+}               
+        /*
+            pseudo element to add division lines
+        .bib_Bar_TopContainer_Tabs_Tab::after {
+            content: '';
+            display: inline-block;
+            top: -1.4rem;
+            left: 100%;
+            border-radius: 20px;
+            background-color: rgb(255, 255, 255);
+            height: 1.1rem;
+            width: 1px;
+            position: relative;
+            z-index: 20000;
+        } */
+    .bib_Bar_TopContainer_Tabs_TabIcon{              
+        /*flex controls the "container" of image, width and height the displayed source image*/
+        flex: 0 0 20px;        
+        width: 20px;
+        max-height: 30px;
+    }
+    .bib_Bar_TopContainer_Tabs_TabTitle{             
+        flex: 0 0 130px;
+        
+        line-height: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        
+        color: black;
+        font-size: 13px;
+        font-weight: 300;
+        color: white;
+    }
+    .bib_Bar_TopContainer_Tabs_TabCloseButton{               
+        flex: 0 0 20px;
+        
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        align-items: center;
+        text-align: center;
+        line-height: 20px;
+        font-weight: 500;
+        font-size: 17px;
+
+        color: white;
+    }
+    
+
+/*---------ACTIVE TAB----------------*/
+.bib_Bar_TopContainer_Tabs_ActiveTab{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    /* 
+        shrink: minimum, grow: max, basis: ideal 
+        using a number means it is proportional. That is
+            all the space will be divided in proportion
+            to the number indicating in each object.
+        making it equal to 0 means it will not change its size at all
+    */
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 200px;
+
+    border-radius: 10px 10px 0 0;
+    /*This overflow is just so the inner elements don't hide the rounded borders*/
+    overflow: hidden;
+    
+    height: 100%;
+
+    background-color: rgb(255 255 255);
+}             
+    /*This section is for the active tab style*/        
+    .bib_Bar_TopContainer_Tabs_ActiveTabIcon{    
+        /*flex controls the "container" of image, width and height the displayed source image*/          
+        flex: 0 0 20px;
+        width: 20px;
+        max-height: 30px;
+    }
+    .bib_Bar_TopContainer_Tabs_ActiveTabTitle{             
+        flex: 0 0 110px;
+        
+        line-height: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        
+        color: black;
+        font-size: 13px;
+        font-weight: 300;
+        color: black;
+
+    }
+    .bib_Bar_TopContainer_Tabs_ActiveTabCloseButton{               
+        flex: 0 0 20px;
+        
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        align-items: center;
+        text-align: center;
+        line-height: 20px;
+        font-weight: 500;
+        font-size: 17px;
+
+        color: black;
+    }
+.Bib_tabDivisor{
+    flex: 0.8px 0 0;
+    margin-top: 6px;
+    height: 24px;
+    background-color: rgb(255 255 255);
+    color: white;
+
+}

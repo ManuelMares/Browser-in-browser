@@ -1,0 +1,431 @@
+:root {
+    --Color_MainBlue: rgb(0 120 212);
+    --Color_HoverBlue: rgb(40, 143, 223);
+    --Color_ActiveBlue:rgb(76, 166, 235);
+    --Color_MainWhite: rgb(255, 255, 255);
+    --Color_HoverWhite: rgb(199, 199, 199);
+    --Color_ActiveWhite: rgb(225, 224, 224);
+    --Color_black: rgb(0, 0, 0);
+    --Color_Green:rgb(2, 165, 18);
+    --Color_MainGrey: rgb(241 243 244);
+    --Color_HoverGrey: rgb(238, 238, 238);
+    --Color_MainRed: rgb(224, 48, 48);
+    --Color_HoverRed: rgb(232, 66, 66);
+    --Color_ActiveRed: rgb(237, 93, 93);
+    --Bar_Height: 80px;
+}
+
+  
+
+
+.bib_Bar_GeneralContainer{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: var(--Bar_Height);
+
+    position: fixed;
+    top: 0;
+    z-index: 2500;
+   
+}
+
+
+
+/* THIS SECTION SETS THE TOP PART OF THE BAR, WHICH CONTAINS THE TABS */
+    .bib_Bar_TopContainer{
+        display: flex;
+        flex-direction: row;
+        
+        height: 50%;
+        width: 100%;
+
+        background-color: var(--Color_MainBlue);
+    }   
+        .bib_Bar_TopContainer_TabsBar{
+            display: flex;
+            
+            flex-basis: calc(100% - 150px);
+            width: calc(100% - 300px);
+            flex-wrap: nowrap;
+            flex-direction: row;
+        }
+        .bib_Bar_TopContainer_Tabs{
+            margin-left: 15px;
+            display: flex;
+            flex-direction: row;
+
+            /* 
+                shrink: minimum, grow: max, basis: ideal 
+                using a number means it is proportional. That is
+                    all the space will be divided in proportion
+                    to the number indicating in each object.
+                making it equal to 0 means it will not change its size at all
+            */
+            flex-shrink: 0;
+            flex-grow: 0;
+            flex-basis: calc(100% - 100px);
+            height: 100%;
+
+            flex-wrap: nowrap;
+            overflow-x: auto;
+
+        }
+            /* this sections sets the scroll bar */
+            .bib_Bar_TopContainer_Tabs::-webkit-scrollbar{
+                height: 6px;
+                width: 6px;
+                background-color: var(--Color_HoverWhite);
+            }
+            
+            .bib_Bar_TopContainer_Tabs::-webkit-scrollbar-track{
+                background-color: var(--Color_HoverWhite);
+                border-radius: 2px;
+            }
+            
+            .bib_Bar_TopContainer_Tabs::-webkit-scrollbar-thumb{
+                background-color: var(--Color_MainGrey);
+                border-radius: 3px;
+            }
+            
+            
+        /*THIS SECTION STYLES THE WINDOW'S BUTTON (CLOSE, MINIZE, MAXIMIZE)*/
+        .bib_Bar_TopContainer_WindowControls{
+            display: flex;
+            flex-direction: row;
+
+            /* 
+                shrink: minimum, grow: max, basis: ideal 
+                using a number means it is proportional. That is
+                    all the space will be divided in proportion
+                    to the number indicating in each object.
+                making it equal to 0 means it will not change its size at all
+            */
+            flex-shrink: 0;
+            flex-grow: 0;
+            flex-basis: 150px;
+            height: 100%;
+            
+        }
+            .bib_Bar_TopContainer_WindowControls_AddTab{
+                display: flex;
+                flex: 35px 0 0;
+                justify-content: center;
+                
+                height: 35px;
+                margin: 0 5px;
+                border-radius: 50%;
+                margin-top: 2.5px;
+                
+                font-weight: 300;
+                font-size: 25px;
+                line-height: 30px;
+                
+                background-color: transparent;
+                border-color: transparent;
+                color: var(--Color_MainWhite);
+            }
+                .bib_Bar_TopContainer_WindowControls_AddTab:hover{
+                    background-color: var(--Color_HoverBlue);
+                }
+            .bib_Bar_TopContainer_WindowControls_Minimize{    
+                display: flex;
+                flex:1;                
+                justify-content: center;
+
+                height: 100%;
+                
+                font-weight: 100;
+                font-size: 30px;
+                line-height: 30px;
+                
+                background-color: transparent;
+                border-color: transparent;
+                background-color: var(--Color_MainBlue);
+                color: var(--Color_MainWhite);           
+                align-items: center;
+            }
+                .bib_Bar_TopContainer_WindowControls_Minimize:hover{
+                    background-color: var(--Color_HoverBlue);
+                }
+                .bib_Bar_TopContainer_WindowControls_Minimize:active{
+                    background-color: var(--Color_ActiveBlue);
+                }
+            .bib_Bar_TopContainer_WindowControls_ExitFullScreen{ 
+                display: flex;
+                flex:1;                
+                justify-content: center;
+
+                height: 100%;
+                
+                font-weight: 100;
+                font-size: 30px;
+                line-height: 30px;
+                
+                background-color: transparent;
+                border-color: transparent;
+                background-color: var(--Color_MainBlue);
+                color: var(--Color_MainWhite);           
+                align-items: center;
+            }
+                .bib_Bar_TopContainer_WindowControls_ExitFullScreen:hover{
+                    background-color: var(--Color_HoverBlue);
+                }
+                .bib_Bar_TopContainer_WindowControls_ExitFullScreen:active{
+                    background-color: var(--Color_ActiveBlue);
+                }
+            .bib_Bar_TopContainer_WindowControls_Exit{ 
+                display: flex;
+                flex:1;                
+                justify-content: center;
+
+                height: 100%;
+                
+                font-weight: 100;
+                font-size: 30px;
+                line-height: 30px;
+                
+                background-color: transparent;
+                border-color: transparent;
+                background-color: var(--Color_MainBlue);
+                color: var(--Color_MainWhite);                
+                align-items: center;
+            }
+                .bib_Bar_TopContainer_WindowControls_Exit:hover{
+                    background-color: var(--Color_HoverRed);
+                }
+                .bib_Bar_TopContainer_WindowControls_Exit:active{
+                    background-color: var(--Color_ActiveRed);
+                }
+                    .bib_Bar_TopContainer_WindowControls_Button{
+                        width: auto;
+                        height: 18px;
+                    }
+
+
+.bib_bar_BottomContainer{
+    display: flex;
+    width: 100%;
+    height: calc(var(--Bar_Height) / 2);
+
+    background-color: var(--Color_MainWhite);
+}
+.bib_bar_BottomContainer_LeftMenu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    flex: 120px 0 0;
+    height: 100%;
+}
+    .bib_bar_BottomContainer_LeftMenu_Button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+
+        border: transparent;
+        background: transparent;
+        opacity: .6;
+    }
+    .bib_bar_BottomContainer_LeftMenu_Button:hover{
+        background-color: var(--Color_HoverWhite);
+    }
+    .bib_bar_BottomContainer_LeftMenu_Button:active{
+        background-color: var(--Color_ActiveWhite);
+    }
+        .bib_bar_BottomContainer_LeftMenu_Icon{
+            width: 16px;
+        }
+.bib_bar_BottomContainer_SearchBar{
+    /*display: flex;*/
+    /*flex: calc(100% - 240px) 10 10;*/
+    height: 100%;
+}
+
+.bib_bar_BottomContainer_RightMenu{
+    display: flex;
+    flex: 120px 0 0;
+    height: 100%;
+}
+
+
+.bib_bar_BottomContainer_SearchBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+        .bib_bar_BottomContainer_SearchBar:hover .bib_bar_BottomContainer_SearchBar_LeftIcon{
+            background-color: var(--Color_HoverGrey);
+        }
+        .bib_bar_BottomContainer_SearchBar:hover .bib_bar_BottomContainer_SearchBar_Search{
+            background-color: var(--Color_HoverGrey);
+        }
+        .bib_bar_BottomContainer_SearchBar:hover .bib_bar_BottomContainer_SearchBar_RightIcon{
+            background-color: var(--Color_HoverGrey);
+        }
+    .bib_bar_BottomContainer_SearchBar_LeftIcon{
+        height: 30px;
+        width: 50px;
+        background-color: var(--Color_MainGrey);
+        border-radius: 15px 0 0 15px;
+    }
+    .bib_bar_BottomContainer_SearchBar_Search{
+        display: flex;
+        height: 30px;
+        flex: 80 0 0;
+        background-color: var(--Color_MainGrey);
+        border: none;
+        padding: 0;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        color: var(--Color_black);
+        font-size: 14px;
+    }
+    .bib_bar_BottomContainer_SearchBar_RightIcon{
+        height: 30px;
+        width: 50px;
+        background-color: var(--Color_MainGrey);
+        border-radius: 0 15px 15px 0;
+    }
+
+
+.bib_bar_BottomContainer_RightMenu{    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    flex: 120px 0 0;
+    height: 100%;
+}
+    .bib_bar_BottomContainer_RigthtMenu_Button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+
+        border: transparent;
+        background: transparent;
+        opacity: .6;
+    }            
+            .bib_bar_BottomContainer_RigthtMenu_Button:hover{
+                background-color: var(--Color_HoverWhite);
+            }
+            .bib_bar_BottomContainer_RigthtMenu_Button:active{
+                background-color: var(--Color_ActiveWhite);
+            }
+        .bib_bar_BottomContainer_RigthtMenu_Icon{
+            width: 17px;
+            height: 17px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            

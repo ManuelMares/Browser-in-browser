@@ -1,0 +1,25 @@
+:root {
+    --barColor: #032548;
+    --barHeight: 80px;
+    --barZIndex: 3000;
+}
+  
+
+.topMargin{
+    margin-top: var(--barHeight) !important;
+  }
+  
+.shrinkAndTranslate_porcentage{  
+    transform: translateY(var(--barHeight))!important;
+    height: calc(100% - var(--barHeight)) !important;
+}
+.shrinkAndTranslate_vh{  
+    transform: translateY(var(--barHeight))!important;
+    height: calc(100vh - var(--barHeight)) !important;
+}
+
+.translate{
+    transform: translateY(var(--barHeight))!important;
+}
+
+  

@@ -1,0 +1,55 @@
+{
+    "manifest_version": 3,
+    "name": "Browser-in-Browser",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "action": {
+      "default_popup": "popup.html",
+      "default_title": "Browser-in-browser",
+      "default_icon": {
+        "16": "icons/icon16.png",
+        "32": "icons/icon32.png",
+        "48": "icons/icon48.png",
+        "64": "icons/icon64.png",
+        "128": "icons/icon128.png"
+      }
+    },
+    "icons": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "64": "icons/icon64.png",
+      "128": "icons/icon128.png"
+    },  
+    "permissions": ["storage", "activeTab", "scripting", "tabs", "bookmarks"],
+    "background": {"service_worker": "background.js"},
+    "content_scripts":[
+        {
+            "css": ["BibBar/bar.css"],
+            "js": [ "BibBar/barControllers/barController_OnLoad.js",            "BibBar/barControllers/barController_relocateBar.js",
+                    "BibBar/barControllers/barController_creator.js",           "BibBar/barControllers/barController_tabs.js", 
+                    "BibBar/barControllers/barController_historyButtons.js",    "BibBar/barControllers/barController_searchBar.js", 
+                    "BibBar/barControllers/barController_optionsMenu.js",       "BibBar/barControllers/barController_fullScreen.js",
+                    "BibBar/barControllers/barController_windowControls.js"
+                  ],
+            "matches": ["*://*/*"], 
+            "match_about_blank": true
+        }
+    ],
+    "web_accessible_resources": [{
+        "resources" : [ "BibBar/bar.html", "BibBar/bar.css", "icons/icon32.png",
+                        "BibBar/Components/activeTab.html", "BibBar/Components/innactiveTab.html", "BibBar/Components/tab.css",
+                        "BibBar/Icons/no-favicon.svg", "BibBar/barController/barController_tabs.js",
+                        "BibBar/Icons/previous.svg", "BibBar/Icons/next.svg", "BibBar/Icons/refresh.svg",
+                        "BibBar/Icons/extensions.svg", "BibBar/Icons/more.svg",
+                        "BibBar/Icons/close.svg", "BibBar/Icons/fullScreen_out.svg", "BibBar/Icons/fullScreen_in.svg", "BibBar/Icons/minimize.svg",
+                        "BibBar/Components/moreMenu/moreMenu.css", "BibBar/Components/moreMenu/moreMenu.html",
+                        "BibBar/webPage_addedStyles.css", "BibBar/webpageModifiers.json"
+
+                    ],
+        "matches": ["*://*/*"]
+    }],
+    "content_security_policy":{
+      "extension_page": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+      } 
+  }
