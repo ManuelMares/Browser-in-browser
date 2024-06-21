@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }, false);*/
 
 var body = document.body;
-console.log('Working!');
+// console.log('Working!');
 
 var generalWrapper = document.createElement('div');
 generalWrapper.setAttribute("class","wrapper");

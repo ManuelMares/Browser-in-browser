@@ -16,9 +16,10 @@ window.addEventListener('load', function () {
   window.scrollBy(0, 0);
 })
 
-function startBrowserInBroswerMode(){
+async function startBrowserInBroswerMode(){
   pushWebsite();   
   loadCustomBar();
+  await loadCustomBar();
 }
 
 
@@ -48,6 +49,7 @@ async function getTextContent(dir){
   return fetch(chrome.runtime.getURL(dir))
   .then((resp) => { return resp.text(); })
   .then((content) => { 
+      content = content.replaceAll("BIB_EXTENSION_ID", BIB_EXTENSION_ID);
       return  content;
   });
 }
@@ -178,7 +180,46 @@ new MutationObserver(() => {
   //console.log("something happened");
 }).observe(document, {subtree: true, childList: true});
 
-
+/* 
+This function waits until an HTML element exists, and returns it when that happens
+All process will stop until the element exists
+@param selector
+A selector property from the element to wait for
+*/
+function asyncQuery(selector) {
+  return new Promise(resolve => {
+      if (document.querySelector(selector)) {
+          return resolve(document.querySelector(selector));
+      }
+      const observer = new MutationObserver(mutations => {
+          if (document.querySelector(selector)) {
+              resolve(document.querySelector(selector));
+              observer.disconnect();
+          }
+      });
+      observer.observe(document.body, {
+          childList: true,
+          subtree: true
+      });
+  });
+}
+function asyncQueryAll(selector) {
+  return new Promise(resolve => {
+      if (document.querySelectorAll(selector)) {
+          return resolve(document.querySelectorAll(selector));
+      }
+      const observer = new MutationObserver(mutations => {
+          if (document.querySelectorAll(selector)) {
+              resolve(document.querySelectorAll(selector));
+              observer.disconnect();
+          }
+      });
+      observer.observe(document.body, {
+          childList: true,
+          subtree: true
+      });
+  });
+}
 
 
 

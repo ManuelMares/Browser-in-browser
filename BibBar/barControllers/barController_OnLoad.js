@@ -11,49 +11,19 @@
 * @author Manuel Mares
 *
 ******************************************************************************/
-let _SEARCH_BAR = null;
-let _FULL_SCREEN_TOGGLE = false;
-let _THIS_TAB_ID = null;
-let _THIS_BAR = null;
-let _THIS_URL = null;
-let _SHOW_BAR_ADDRESS = 1 //0 no address, 1 full domain, 2 qualified domain
-const _CLOSE_TAB_TIME_IN_SECONDS_ = 330; //In seconds
-const _NO_PIN_HOSTS = [ "stackoverflow.com" ] //Might nor be fully working yet
-const _URLS_NO_CLOSE_BUTTON_ = [
-    "http://127.0.0.1:8080/task1.html",
-    "http://127.0.0.1:8080/task2.html",
-    "http://127.0.0.1:8080/task3.html",
-    "http://127.0.0.1:8080/task4.html",
-    "http://127.0.0.1:8080/task5.html",
-    "http://127.0.0.1:8080/task6.html",
-    "http://127.0.0.1:8080/task7.html",
-    "http://127.0.0.1:8080/task8.html",
-    "http://127.0.0.1:8080/task9.html",
-    "http://127.0.0.1:8080/task10.html",
-    "http://127.0.0.1:8080/task11.html",
-    "http://127.0.0.1:8080/task12.html",
-    "http://127.0.0.1:8080/task13.html",
-    "http://127.0.0.1:8080/task14.html",
-    "http://127.0.0.1:8080/task15.html",
-    "http://127.0.0.1:8080/task16.html",
-    "http://127.0.0.1:8080/task17.html",
-    "http://127.0.0.1:8080/task18.html",
-    "http://127.0.0.1:8080/task19.html",
-    "http://127.0.0.1:8080/task20.html",
-    "http://127.0.0.1:8080/task21.html",
-    "http://127.0.0.1:8080/task22.html",
-    "http://127.0.0.1:8080/task23.html",
-    "http://127.0.0.1:8080/task24.html",
-    "http://127.0.0.1:8080/task25.html",
-    "http://127.0.0.1:8080/task26.html",
-    "http://127.0.0.1:8080/task27.html",
-    "http://127.0.0.1:8080/task28.html",
-    "http://127.0.0.1:8080/task29.html",
-    "http://127.0.0.1:8080/task30.html",
-    "http://127.0.0.1:8080/directions.html",
-    "http://127.0.0.1:8080/index.html",
-]
-const _TABS_NO_CLOSE_AFTER_TIME_ = _URLS_NO_CLOSE_BUTTON_;
+let _SEARCH_BAR                                 = null;
+let _FULL_SCREEN_TOGGLE                         = false;
+let _THIS_TAB_ID                                = null;
+let _THIS_BAR                                   = null;
+let _THIS_URL                                   = null;
+let _SHOW_BAR_ADDRESS                           = 1                     //0 no address, 1 full domain, 2 qualified domain
+let _USE_TIMER                                  = false;
+const _CLOSE_TAB_TIME_IN_SECONDS_               = 15;                   //If you want the tabs to close after certain time, just indicate the time in seconds here
+const _NO_PIN_HOSTS                             = [ ]                   //Might nor be fully working yet
+const _URLS_NO_CLOSE_BUTTON_                    = [ ]                   //Add urls to this list to avoid users closing tabs by accident
+const _TABS_NO_CLOSE_AFTER_TIME_                = [ ];                  //take the 'close' button away from the user in this list of pages
+
+let BIB_EXTENSION_ID                            = chrome.runtime.id;
 
 /**
  * This function sets the values of the global variables
@@ -233,6 +203,8 @@ async function getHTMLElement(htmlDir){
   return fetch(chrome.runtime.getURL(htmlDir))
         .then((resp) => { return resp.text(); })
         .then((content) => { 
+            console.log("we are printing: ", htmlDir)
+            content = content.replaceAll("BIB_EXTENSION_ID", BIB_EXTENSION_ID);
             return  content;
         });
 }
@@ -380,6 +352,9 @@ function getTabURL(tabId){
 
 */
 function startTimerForTab(timeInSeconds, excludedTabsHostName){
+    if(!_USE_TIMER)
+        return;
+
     //If the hostname is in the list of safe tabs, don't start the counter
     for(var i = 0; i < excludedTabsHostName.length; i++){
         hostname = excludedTabsHostName[i];

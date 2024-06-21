@@ -167,7 +167,7 @@ function addTabs(tabs, tabsContainer){
 }
 
 /**
- * Sets the value of the toggle to be full scree
+ * Sets the value of the toggle to be full screen
  * @returns promise
 */
 function setToggleFullScreen(){
