@@ -65,9 +65,9 @@ function minimizeWindow(){
 */
 function setFullScreenWindow(){
     if(_FULL_SCREEN_TOGGLE)
-        document.getElementById("bib_Bar_TopContainer_WindowControls_ExitFullScreenImg").setAttribute("src",`chrome-extension://${BIB_EXTENSION_ID}/BibBar/Icons/fullScreen_out.svg`)
+        document.getElementById("bib_Bar_TopContainer_WindowControls_ExitFullScreenImg").setAttribute("src","chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/fullScreen_out.svg")
     else
-        document.getElementById("bib_Bar_TopContainer_WindowControls_ExitFullScreenImg").setAttribute("src",`chrome-extension://${BIB_EXTENSION_ID}/BibBar/Icons/fullScreen_in.svg`)
+        document.getElementById("bib_Bar_TopContainer_WindowControls_ExitFullScreenImg").setAttribute("src","chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/fullScreen_in.svg")
     
 }
 

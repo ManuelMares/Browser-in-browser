@@ -100,6 +100,7 @@ function requestTabs(){
       {type: "barController_tabs_RequesTab"},
       function (response) 
       {
+        console.log(response)
         resolve( response );
         reject()
       }
@@ -144,6 +145,7 @@ function loadTabs(tabs){
     addTabsContainerCSS(tabsContainer)
   })
 }
+
 
 /**
  * Adds a list of tabs to a given HTML Node
@@ -226,18 +228,21 @@ function getFullScreenToggleValue(){
  *  This param is used internally to maintain the order of the tabs when rendered
 */
 async function createTab(tabsContainer, tab, index){
-  //There are two types of tabs: activeTab.html and innactiveTab.html
+  //There are four types of tabs: 
+      //activeTab.html and inactiveTab.html
+      //Each on can be pinned or not pinned
   //The properties to modify of each tab are:
   //  id:     #bib_Bar_TopContainer_Tabs_Tab (has to be changed for the actual id of the tab)
   //  icon:   bib_Bar_TopContainer_Tabs_TabIcon (set image)
   //  title:  bib_Bar_TopContainer_Tabs_TabTitle (set innerHTML)
   //While editing the properties of each tab, a temporary container is created
-  //The temporary container is faster to use than retriving each tab from the DOM
+  //The temporary container is faster to use than retrieving each tab from the DOM
   //The tabs are set into the DOM after being edited
   var tabId = tab["id"]
   var title = tab["title"]
   var icon = tab["favIconUrl"]
   var statusActive = tab["active"];
+  var isPinned = tab["pinned"];
   var temporaryTab = document.createElement('div');
 
   var divisorBar = document.createElement('div');
@@ -245,13 +250,27 @@ async function createTab(tabsContainer, tab, index){
   divisorBar.setAttribute('class', "Bib_tabDivisor")
 
   
-  /*------------Set the style of active and innactive tabs---------------*/
+  /*------------Set the style of active and inactive tabs---------------*/
   if(statusActive){
     _THIS_TAB_ID = tabId;
-    temporaryTab.innerHTML = await getHTMLElement("BibBar/Components/activeTab.html");
+    if(isPinned){
+      console.log("is pinned and active ", _THIS_TAB_ID)
+      temporaryTab.innerHTML = await getHTMLElement("BibBar/Components/activeTab_pinned.html");
+    }
+    if(!isPinned){
+      console.log("is unpinned and active ", _THIS_TAB_ID)
+      temporaryTab.innerHTML = await getHTMLElement("BibBar/Components/activeTab.html");
+    }
   }
   if(!statusActive){
-    temporaryTab.innerHTML = await getHTMLElement("BibBar/Components/innactiveTab.html")
+    if(isPinned){
+      console.log("is pinned and innactive")
+      temporaryTab.innerHTML = await getHTMLElement("BibBar/Components/inactiveTab_pinned.html")
+    }
+    if(!isPinned){
+      console.log("is unpinned and inactive")
+      temporaryTab.innerHTML = await getHTMLElement("BibBar/Components/inactiveTab.html")
+    }
   }
 
 
@@ -262,11 +281,47 @@ async function createTab(tabsContainer, tab, index){
   if(icon != "")
     temporaryTab.children[0].children[0].setAttribute('src', icon);  //change the icon
   //change title
-  temporaryTab.children[0].children[1].innerHTML = title;  //change the title
+  if(!isPinned)
+    temporaryTab.children[0].children[1].innerHTML = title;  //change the title
   
 
-  tabsContainer.innerHTML += temporaryTab.innerHTML;
-  if(!statusActive)
-    tabsContainer.appendChild(divisorBar);
+
+
+
+  
+  /*------------Delete closing button if the tab is marked as no closing---------------*/
+  //get the url of the created tab. This is not a property of the tab due to asynchronous problems
+  getTabURL(tabId)
+  .then((tabURL)=>{
+    //In case you want to change this function to work with hostnames, base the new behavior in this code: 
+    // var address = document.createElement("a");
+    // address.href = tab.url 
+    // hostname =address.hostname
+    // console.log("hostname: ", hostname)
+    
+
+    //Given a list of urls, the tabs get their close button removed
+    _URLS_NO_CLOSE_BUTTON_.map((url)=>{
+        if(!isPinned && (tabURL.localeCompare(url) == 0)){
+          //Hide button
+          let closeButton = temporaryTab.children[0].children[2]
+          closeButton.style.visibility = "hidden";
+        }
+
+        
+      })
+      
+      /*------------Adding tab to the interface---------------*/
+      tabsContainer.innerHTML += temporaryTab.innerHTML;
+      if(!statusActive)
+        tabsContainer.appendChild(divisorBar);
+  })
+
+
+  
+
+
+
+    
 }
 

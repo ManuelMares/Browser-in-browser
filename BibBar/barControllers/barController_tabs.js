@@ -56,7 +56,6 @@ function manageTabs(e){
     var isTabHolder = e.target.dataset.istabholder;
     var isCloseButton = e.target.dataset.isclosebutton;
     var tabId = isTabHolder == "true" ? e.target.id : e.target.parentNode.id;
-
     if(isCloseButton == "true"){ 
       closeTabController(tabId)
       .then(ans => { 
@@ -166,6 +165,7 @@ function focusTab(tabId){
     )
   })
 }
+
 
 
 

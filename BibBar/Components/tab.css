@@ -1,6 +1,31 @@
-/*This file gives styles to both, activeTab and innactiveTab. 
+/*This file gives styles to both, activeTab and inactiveTab. 
 It is used in bar.html, put set dinamically through bar.js as the content of a script tag*/
 
+
+/*---------INNACTIVE TAB PINNED----------------*/
+.bib_Bar_TopContainer_Tabs_Tab_Pinned{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    /* 
+        shrink: minimum, grow: max, basis: ideal 
+        using a number means it is proportional. That is
+            all the space will be divided in proportion
+            to the number indicating in each object.
+        making it equal to 0 means it will not change its size at all
+    */
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 40px;
+
+    border-radius: 10px 10px 0 0;
+    /*This overflow is just so the inner elements don't hide the rounded borders*/
+    overflow: hidden;
+    
+    height: 100%;
+}    
 
 /*---------INNACTIVE TAB----------------*/
 .bib_Bar_TopContainer_Tabs_Tab{
@@ -30,7 +55,7 @@ It is used in bar.html, put set dinamically through bar.js as the content of a s
     background-color: rgb(12, 132, 224);
 }   
 .bib_Bar_TopContainer_Tabs_Tab:active{
-    background-color: rgb(37, 146, 229);
+    background-color: rgb(64, 9, 0);
 }               
         /*
             pseudo element to add division lines
@@ -78,8 +103,37 @@ It is used in bar.html, put set dinamically through bar.js as the content of a s
 
         color: white;
     }
-    
+        .bib_Bar_TopContainer_Tabs_TabCloseButton:hover{        
+            background-color: rgb(220, 220, 220);
+            color:black;
+        }
 
+/*--------ACTIVE TAB Pinned----------------*/
+.bib_Bar_TopContainer_Tabs_ActiveTab_Pinned{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    /* 
+        shrink: minimum, grow: max, basis: ideal 
+        using a number means it is proportional. That is
+            all the space will be divided in proportion
+            to the number indicating in each object.
+        making it equal to 0 means it will not change its size at all
+    */
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 40px;
+
+    border-radius: 10px 10px 0 0;
+    /*This overflow is just so the inner elements don't hide the rounded borders*/
+    overflow: hidden;
+    
+    height: 100%;
+
+    background-color: rgb(255 255 255);
+}  
 /*---------ACTIVE TAB----------------*/
 .bib_Bar_TopContainer_Tabs_ActiveTab{
     display: flex;
@@ -139,6 +193,9 @@ It is used in bar.html, put set dinamically through bar.js as the content of a s
         font-size: 17px;
 
         color: black;
+    }
+    .bib_Bar_TopContainer_Tabs_ActiveTabCloseButton:hover{
+        background-color: rgb(220, 220, 220);
     }
 .Bib_tabDivisor{
     flex: 0.8px 0 0;

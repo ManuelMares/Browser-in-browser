@@ -69,6 +69,8 @@
 ******************************************************************************/
 var _TOGGLE_STATUS = false;
 var _WIN_ID = false;  
+var _TAB_TO_PIN_ID_Integer = -1; //integer
+let _SHOW_BAR_ADDRESS = 1; //0-hides url, 1-shows full url, 0-shows qualified domain
 getWindowId();
 
 /**
@@ -83,7 +85,17 @@ getWindowId();
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse){   
         if(request.type == "barController_tabs_RequesTab"){ 
-            getTabs().then(ans => {sendResponse(ans)});                        
+            getTabs().then(ans => {sendResponse(ans, _TAB_TO_PIN_ID_Integer)});                        
+        }   
+        //controls the _SHOW_BAR_ADDRESS variable
+        if(request.type == "barController_OnLoad_get_SHOW_BAR_ADDRESS"){ 
+            sendResponse(_SHOW_BAR_ADDRESS);                  
+        }   
+        if(request.type == "barController_OnLoad_set_SHOW_BAR_ADDRESS"){ 
+            set_SHOW_BAR_ADDRESS()
+            .then((ans)=>{
+                sendResponse(_SHOW_BAR_ADDRESS);                  
+            }) 
         }   
         if(request.type == "barController_tabs_FocusTab"){
             focusTab(request.tabId)
@@ -152,11 +164,92 @@ chrome.runtime.onMessage.addListener(
             .then( tabsIds =>  {exitChrome(tabsIds)} )
             .then( ans => {sendResponse(ans)})
         }
-
+        if(request.type == "barController_timer"){
+            checkTime(request.tabId, request.delayInSeconds)
+        }
+        if(request.type == "flagTabToPin"){
+            flagTabToPin();
+        }
+        
+        if(request.type == "get_tab_id"){
+            get_tab_id()
+            .then(
+                tabId => {
+                    sendResponse(tabId);
+                }
+            )
+        }
+        
         //this return keeps the port open until an answer is returned
         return true;
     }
 )
+
+/*
+ Returns the tabId from the tab that requested the value
+ @return
+    A promise answer being an integer that indicates the tabId
+*/
+function get_tab_id(){
+    return new Promise((resolve, reject) => {
+        chrome.tabs.query({ active: true }, function(tabs) {
+            resolve(tabs[0].id);
+       });
+    });
+}
+
+/*
+    Updates the _SHOW_BAR_ADDRESS variable
+    @returns
+        An integer representing the status of _SHOW_BAR_ADDRESS
+    note:
+        0 - shows no url
+        1 - shows full url
+        2 - shows only qualified domain
+*/
+function set_SHOW_BAR_ADDRESS(){
+    return new Promise((resolve, reject) => {
+        _SHOW_BAR_ADDRESS++;       
+        if(_SHOW_BAR_ADDRESS == 3)
+            _SHOW_BAR_ADDRESS = 0;        
+        resolve(_SHOW_BAR_ADDRESS)
+    });
+}
+
+async function checkTime(tabId, delayInSeconds){   
+    await delay(delayInSeconds * 1000);
+    closeTab(tabId);
+}
+
+/*
+    Closes the active tab
+*/
+function closeTab(){
+    chrome.tabs.query({ active: true }, function(tabs) {
+        chrome.tabs.remove(tabs[0].id);
+   });
+}
+
+/*
+    Closes the specified tab
+*/
+function closeTab(tabId){
+    console.log("going to close: ", tabId)
+    chrome.tabs.query({currentWindow: true}, function(tabs) {
+        tabs.map(tab => {
+            console.log(tab.id, tabId)
+            if(tab.id == tabId){
+                chrome.tabs.remove(tab.id);
+            }
+        })    
+     });
+}
+
+function flagTabToPin(){
+    chrome.tabs.query({ active: true }, function(tabs) {
+        _TAB_TO_PIN_ID_Integer = parseInt(tabs[0].id)
+   });
+}
 
 
 /**
@@ -223,8 +316,24 @@ async function getWindowId(){
     })
 }
 
+/*
+    Retrieves the url of he active tab
+    @param tabId
+        The id to get the url from
+    @returns
+        A promise
+*/
+function getURL(){
+    return new Promise((resolve, reject) => {
+        chrome.tabs.query({active:true, currentWindow:true}, function(tabs){
+            resolve(tabs[0].url);
+            reject();
+        });
+    });
+}
+
 /**
- * Retrieves the url of a webpage
+ * Retrieves the url of the indicated tab
  * @param tabId 
  *   The id to get the url from
  * @returns 
@@ -232,9 +341,14 @@ async function getWindowId(){
 */
 function getURL(tabId){
     return new Promise((resolve, reject) => {        
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            resolve( tabs[0].url );
-            reject();       
+        chrome.tabs.query({currentWindow: true}, function(tabs) {
+            tabs.map(tab => {
+                console.log(tabId, tab.id, tab.url)
+                if(tab.id == tabId){
+                    resolve( tab.url );
+                    reject(); 
+                }
+            })    
          });
     })     
 }
@@ -532,3 +646,14 @@ function getActiveTabId(){
         )       
     })
 }
+
+
+
+
+const delay = (timeInMs) => {
+    return new Promise(resolve => {    
+        setTimeout(function() {
+          resolve();
+        }, timeInMs)
+    });
+  }

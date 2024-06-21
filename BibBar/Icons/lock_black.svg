@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="113.14704mm"
+   height="137.1066mm"
+   viewBox="0 0 113.14704 137.1066"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="locks.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.71624579"
+     inkscape:cx="396.51193"
+     inkscape:cy="450.26443"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(147.3566,3.4042551)">
+    <rect
+       style="fill:#000000;stroke:#dd0000;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers"
+       id="rect234"
+       width="113.14703"
+       height="89.505241"
+       x="-147.3566"
+       y="44.197102"
+       ry="2.7791429"
+       inkscape:export-filename="lock_black.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       id="path288"
+       style="fill:#000000;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       d="m -90.044326,-1.4042551 a 43.958958,43.958958 0 0 0 -43.959084,43.9590721 43.958958,43.958958 0 0 0 43.959084,43.958558 43.958958,43.958958 0 0 0 43.95907,-43.958558 43.958958,43.958958 0 0 0 -43.95907,-43.9590721 z m 0,10.6417257 a 33.366749,33.366749 0 0 1 33.36695,33.3669564 33.366749,33.366749 0 0 1 -33.36695,33.366955 33.366749,33.366749 0 0 1 -33.366444,-33.366955 33.366749,33.366749 0 0 1 33.366444,-33.3669564 z" />
+  </g>
+</svg>

@@ -34,7 +34,6 @@
  * @note
  *  (1) focusInput
 */
-
 document.addEventListener('click', function(e){
     if(e.target.id == "bib_bar_BottomContainer_SearchBar_LeftIcon" ||
        e.target.id == "bib_bar_BottomContainer_SearchBar_Search"  ||
@@ -46,40 +45,14 @@ document.addEventListener('click', function(e){
  * This function sets the focus into the searchBar.input element
 */
 function focusInput(){
-    let username = document.querySelector('#email');
-
-        if(username.setAttribute('disabled',true)){
-    //window.onload = function () {
-    //document.secure_login.username.focus();
-    //}
-    //document.querySelector('#email_alt').focus();
-    
-        }
-    
-_SEARCH_BAR.focus();
-document.getElementById("#secure_login").focus();
+    _SEARCH_BAR.focus();
 }
-
-
-//check if a log in form is in the page. assume the input of facebook is called username
-    //1) bring your form
-    //var form1 = document.querySelector(".Sdfgsdfgsdf")
-    //form1.innerHTML = "
-     //               <input type="text" placeholder="Username" name="username"  id="email_alt">
-     //               <input type="text" placeholder="Password" name="psw">
-     //               <button type="submit" >Login</button>
-    //"
-    //2)hide the other form
-    //username.setAttribute("hidden", "")
-
-
 
 /**
  * Redirects current tab to a new search request
  * @param searchString
  *  An event
 */
-
 function Search(searchString){
     var newURL = createURL(searchString);
     return new Promise((resolve, reject) => {
@@ -105,52 +78,35 @@ function Search(searchString){
  * @return
  *  A string with the url to navigate to
 */
-
 function createURL(searchString){
     return "https://www.google.com/search?q=" + searchString;
-    if (window.onload){
-    let username = document.querySelector('#email');
-    let password = document.querySelector('#psw');
-    let submit = document.querySelector('#submit');
-
-    username.setAttribute('disabled',"Please Enter your EMAIL up there in the secure login");
-    password.setAttribute('disabled',"please Enter your PASSWORD up there in the secure login");
-
-    document.getElementById('#secure_login').focus();
-
-    //
-    submit.addEventListener('click',function()){
-
-    }
-    }
 }
 
-/*var inputs = document.querySelectorAll('input[type=text]')
+/**
+ * This function retrieves the qualified domain
+ * @return
+ *  A string
 */
-//inputs.focus();
+function concatenateURL(){
+    var concatenateURL = getTabURL();
+    concatenateURL = window.location.protocol + "//" + window.location.host;
+    return concatenateURL;
+}
+
+/**
+ * This function sets the inner of the value of the bib search bar input to the qualified domain given by _THIS_URL
+ * @return
+ *  A string
+*/
+async function displayURL(){
+    var searchBar = await asyncQuery("#bib_bar_BottomContainer_SearchBar_Search");
+    console.log("THE URL IS: ", _THIS_URL);
+    searchBar.setAttribute("value", _THIS_URL);
+    searchBar.placeholder = _THIS_URL;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+async function pinTab(excludedTabHostName){
+    if(location.hostname.localeCompare(excludedTabHostName) == 0)
+      return;      
+}

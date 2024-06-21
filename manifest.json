@@ -38,18 +38,19 @@
     ],
     "web_accessible_resources": [{
         "resources" : [ "BibBar/bar.html", "BibBar/bar.css", "icons/icon32.png",
-                        "BibBar/Components/activeTab.html", "BibBar/Components/innactiveTab.html", "BibBar/Components/tab.css",
+                        "BibBar/Components/activeTab.html", "BibBar/Components/inactiveTab.html", "BibBar/Components/tab.css",
+                        "BibBar/Components/activeTab_pinned.html", "BibBar/Components/inactiveTab_pinned.html",
                         "BibBar/Icons/no-favicon.svg", "BibBar/barController/barController_tabs.js",
                         "BibBar/Icons/previous.svg", "BibBar/Icons/next.svg", "BibBar/Icons/refresh.svg",
                         "BibBar/Icons/extensions.svg", "BibBar/Icons/more.svg",
-                        "BibBar/Icons/close.svg", "BibBar/Icons/fullScreen_out.svg", "BibBar/Icons/fullScreen_in.svg", "BibBar/Icons/minimize.svg",
+                        "BibBar/Icons/close.svg", "BibBar/Icons/fullScreen_out.svg", "BibBar/Icons/fullScreen_in.svg", "BibBar/Icons/minimize.svg", "BibBar/Icons/lock_black.png", "BibBar/Icons/lock_green.png",
                         "BibBar/Components/moreMenu/moreMenu.css", "BibBar/Components/moreMenu/moreMenu.html",
                         "BibBar/webPage_addedStyles.css", "BibBar/webpageModifiers.json"
 
                     ],
         "matches": ["*://*/*"]
-    }],
-    "content_security_policy":{
-      "extension_page": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
-      } 
+      }],
+      "content_security_policy":{
+        "extension_page": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+        } 
   }

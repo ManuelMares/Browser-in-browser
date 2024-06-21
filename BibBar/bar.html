@@ -49,13 +49,13 @@
     </div>
     <div class="bib_Bar_TopContainer_WindowControls">
         <button class="bib_Bar_TopContainer_WindowControls_Minimize" id="bib_Bar_TopContainer_WindowControls_Minimize">
-            <img data-usebibid class="bib_Bar_TopContainer_WindowControls_Button" id="bib_Bar_TopContainer_WindowControls_MinimizeImg" src="chrome-extension://BIB_EXTENSION_ID/BibBar/Icons/minimize.svg"/>
+            <img class="bib_Bar_TopContainer_WindowControls_Button" id="bib_Bar_TopContainer_WindowControls_MinimizeImg" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/minimize.svg"/>
         </button>
-        <button  class="bib_Bar_TopContainer_WindowControls_ExitFullScreen" id="bib_Bar_TopContainer_WindowControls_ExitFullScreen">
-            <img data-usebibid class="bib_Bar_TopContainer_WindowControls_Button" id="bib_Bar_TopContainer_WindowControls_ExitFullScreenImg" src="chrome-extension://BIB_EXTENSION_ID/BibBar/Icons/fullScreen_in.svg"/>
+        <button class="bib_Bar_TopContainer_WindowControls_ExitFullScreen" id="bib_Bar_TopContainer_WindowControls_ExitFullScreen">
+            <img class="bib_Bar_TopContainer_WindowControls_Button" id="bib_Bar_TopContainer_WindowControls_ExitFullScreenImg" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/fullScreen_in.svg"/>
         </button>
         <button class="bib_Bar_TopContainer_WindowControls_Exit" id="bib_Bar_TopContainer_WindowControls_Exit">            
-            <img data-usebibid class="bib_Bar_TopContainer_WindowControls_Button" id="bib_Bar_TopContainer_WindowControls_ExitImg" src="chrome-extension://BIB_EXTENSION_ID/BibBar/Icons/close.svg"/>
+            <img class="bib_Bar_TopContainer_WindowControls_Button" id="bib_Bar_TopContainer_WindowControls_ExitImg" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/close.svg"/>
         </button>
     </div>
     
@@ -65,33 +65,29 @@
     <!--left menu-->
     <div class="bib_bar_BottomContainer_LeftMenu" id="bib_bar_BottomContainer_LeftMenu">
         <button class="bib_bar_BottomContainer_LeftMenu_Button" id="bib_bar_BottomContainer_LeftMenu_PreviousButton">
-            <img data-usebibid class="bib_bar_BottomContainer_LeftMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_PreviousIcon" src="chrome-extension://BIB_EXTENSION_ID/BibBar/Icons/previous.svg"/>
+            <img class="bib_bar_BottomContainer_LeftMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_PreviousIcon" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/previous.svg"/>
         </button>
         <button class="bib_bar_BottomContainer_LeftMenu_Button" id="bib_bar_BottomContainer_LeftMenu_NextButton">
-            <img  data-usebibid class="bib_bar_BottomContainer_LeftMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_NextIcon" src="chrome-extension://BIB_EXTENSION_ID/BibBar/Icons/next.svg"/>
+            <img class="bib_bar_BottomContainer_LeftMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_NextIcon" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/next.svg"/>
         </button>
         <button class="bib_bar_BottomContainer_LeftMenu_Button" id="bib_bar_BottomContainer_LeftMenu_RefreshButton">
-            <img  data-usebibid class="bib_bar_BottomContainer_LeftMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_RefreshIcon" src="chrome-extension://BIB_EXTENSION_ID/BibBar/Icons/refresh.svg"/>
+            <img class="bib_bar_BottomContainer_LeftMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_RefreshIcon" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/refresh.svg"/>
         </button>
     </div>
     <!--search bar-->
     <div class="bib_bar_BottomContainer_SearchBar" id="bib_bar_BottomContainer_SearchBar">
-        <div class="bib_bar_BottomContainer_SearchBar_LeftIcon" id="bib_bar_BottomContainer_SearchBar_LeftIcon"></div>
-        <div class="bib_bar_BottomContainer_SearchBar_Search" id="bib_bar_BottomContainer_SearchBar_Search" placeholder="Search something!">
-                <!--add a new input element. Make it transparent with css. Change outline to none, border, bg-color-->
-                <form id="Sdfgsdfgsdf" class="form"  name="secure_login" action="/action_page.php">
-                    <input type="text" placeholder="Username" name="username" hidden id="email_alt">
-                    <input type="text" placeholder="Password" hidden name="psw">
-                    <button type="submit" hidden >Login</button>
-                </form>
+        <div class="bib_bar_BottomContainer_SearchBar_LeftIcon" id="bib_bar_BottomContainer_SearchBar_LeftIcon">
+            <img class="bib_bar_BottomContainer_lock_Icon" id="bib_bar_BottomContainer_lock_Icon" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/lock_black.png"/>
         </div>
-        <div class="bib_bar_BottomContainer_SearchBar_RightIcon" id="bib_bar_BottomContainer_SearchBar_RightIcon"></div>
+        <input class="bib_bar_BottomContainer_SearchBar_Search" id="bib_bar_BottomContainer_SearchBar_Search" placeholder="Search something!">
+        
         </input>
+        <div class="bib_bar_BottomContainer_SearchBar_RightIcon" id="bib_bar_BottomContainer_SearchBar_RightIcon"></div>
     </div>
     <!--right menu-->
     <div class="bib_bar_BottomContainer_RightMenu" id="bib_bar_BottomContainer_RightMenu">
         <button class="bib_bar_BottomContainer_RigthtMenu_Button" id="bib_bar_BottomContainer_LeftMenu_ExtensionsButton">
-            <img  data-usebibid class="bib_bar_BottomContainer_RigthtMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_ExtensionIcon" src="chrome-extension://BIB_EXTENSION_ID/BibBar/Icons/extensions.svg"/>
+            <img class="bib_bar_BottomContainer_RigthtMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_ExtensionIcon" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/extensions.svg"/>
         </button>
         
     <!-- 
@@ -99,7 +95,7 @@
      -->
 
         <button class="bib_bar_BottomContainer_RigthtMenu_Button" id="bib_bar_BottomContainer_LeftMenu_MoreButton">
-            <img data-usebibid  class="bib_bar_BottomContainer_RigthtMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_MoreIcon" src="chrome-extension://BIB_EXTENSION_ID/BibBar/Icons/more.svg"/>
+            <img class="bib_bar_BottomContainer_RigthtMenu_Icon" id="bib_bar_BottomContainer_LeftMenu_MoreIcon" src="chrome-extension://bmnjikcfffocfnojbdgohamihgpekkml/BibBar/Icons/more.svg"/>
         </button>
     </div>
 </div>
