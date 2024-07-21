@@ -24,7 +24,7 @@
  *  (3) Open option from more menu
  *  (4) close more menu
 */
-document.addEventListener('click', function(e){
+document.('click', function(e){
     if( e.target.id == "bib_bar_BottomContainer_LeftMenu_ExtensionsButton" ||
         e.target.id == "bib_bar_BottomContainer_LeftMenu_ExtensionIcon")
         openExtensionsPage();
