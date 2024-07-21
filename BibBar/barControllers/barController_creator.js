@@ -10,7 +10,7 @@
 *   (6) _THIS_TAB_ID is a global variable that stores the id of the web page for each tab
 *   (7) _THIS_BAR is a global variable that stores  the extensions bar HTML node
 *
-* @author Manuel Mares
+* @author Manuel Mares, Xindi Zheng
 *
 ******************************************************************************/
 

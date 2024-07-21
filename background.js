@@ -64,13 +64,14 @@
                 }) *                
 *       b) The promise has to be in an independet function
 *
-* @author Manuel Mares
+* @author Manuel Mares, Xindi Zheng
 *
 ******************************************************************************/
-var _TOGGLE_STATUS = false;
-var _WIN_ID = false;  
-var _TAB_TO_PIN_ID_Integer = -1; //integer
-let _SHOW_BAR_ADDRESS = 1; //0-hides url, 1-shows full url, 0-shows qualified domain
+var _TOGGLE_STATUS              = false;
+var _WIN_ID                     = false;  
+var _TAB_TO_PIN_ID_Integer      = -1;               //integer
+let _SHOW_BAR_ADDRESS           = 1;                //0-hides url, 1-shows full url, 0-shows qualified domain
+let _SHOW_PAGE_VALIDATOR        = 0                 //0 BIMI, 1 Traffic Reported, 2 BIMI and Web Traffic, 3 Shows none
 getWindowId();
 
 /**
@@ -87,6 +88,10 @@ chrome.runtime.onMessage.addListener(
         if(request.type == "barController_tabs_RequesTab"){ 
             getTabs().then(ans => {sendResponse(ans, _TAB_TO_PIN_ID_Integer)});                        
         }   
+
+        /*
+        ================== Hot Key Script ===========================
+        */
         //controls the _SHOW_BAR_ADDRESS variable
         if(request.type == "barController_OnLoad_get_SHOW_BAR_ADDRESS"){ 
             sendResponse(_SHOW_BAR_ADDRESS);                  
@@ -94,9 +99,21 @@ chrome.runtime.onMessage.addListener(
         if(request.type == "barController_OnLoad_set_SHOW_BAR_ADDRESS"){ 
             set_SHOW_BAR_ADDRESS()
             .then((ans)=>{
-                sendResponse(_SHOW_BAR_ADDRESS);                  
+                sendResponse(ans);                  
             }) 
         }   
+        //controls the _SHOW_PAGE_VALIDATOR variable
+        if(request.type == "barController_HotKeys_get_SHOW_PAGE_VALIDATOR"){ 
+            sendResponse(_SHOW_PAGE_VALIDATOR);                  
+        }   
+        if(request.type == "barController_HotKeys_set_SHOW_PAGE_VALIDATOR"){ 
+            set_SHOW_PAGE_VALIDATOR()
+            .then((ans)=>{
+                sendResponse(ans);                  
+            }) 
+        }   
+
+
         if(request.type == "barController_tabs_FocusTab"){
             focusTab(request.tabId)
             //The addEventListener replaces this funtion
@@ -209,10 +226,31 @@ function get_tab_id(){
 */
 function set_SHOW_BAR_ADDRESS(){
     return new Promise((resolve, reject) => {
-        _SHOW_BAR_ADDRESS++;       
-        if(_SHOW_BAR_ADDRESS == 3)
-            _SHOW_BAR_ADDRESS = 0;        
-        resolve(_SHOW_BAR_ADDRESS)
+        if(_SHOW_BAR_ADDRESS == 0) _SHOW_BAR_ADDRESS = 1;
+        else if(_SHOW_BAR_ADDRESS == 1) _SHOW_BAR_ADDRESS = 2;
+        else if(_SHOW_BAR_ADDRESS == 2) _SHOW_BAR_ADDRESS = 0;    
+        resolve(_SHOW_BAR_ADDRESS);
+        reject("error setting the bar address");
+    });
+}
+/*
+    Updates the _SHOW_PAGE_VALIDATOR variable
+    @returns
+        An integer representing the status of _SHOW_PAGE_VALIDATOR
+    note:
+        0 - displays BIMI
+        1 - displays Web Traffic indicator
+        2 - displays BIMI and Web Traffic
+        3 - displays none
+*/
+function set_SHOW_PAGE_VALIDATOR(){
+    return new Promise((resolve, reject) => {
+        if(_SHOW_PAGE_VALIDATOR == 0) _SHOW_PAGE_VALIDATOR = 1;
+        else if(_SHOW_PAGE_VALIDATOR == 1) _SHOW_PAGE_VALIDATOR = 2;
+        else if(_SHOW_PAGE_VALIDATOR == 2) _SHOW_PAGE_VALIDATOR = 3;    
+        else if(_SHOW_PAGE_VALIDATOR == 3) _SHOW_PAGE_VALIDATOR = 0;    
+        resolve(_SHOW_PAGE_VALIDATOR);
+        reject("error setting the _SHOW_PAGE_VALIDATOR");
     });
 }
 

@@ -10,12 +10,12 @@
 *   (5) _THIS_TAB_ID is a global variable that stores the id of the web page for each tab
 *   (6) _THIS_BAR is a global variable that stores  the extensions bar HTML node
 *
-* @author Manuel Mares
+* @author Manuel Mares, Xindi Zheng
 *
 ******************************************************************************/
 
 /**
- * This function manages eventListeners in the optionsMenu
+ * This function manages eventListeners in the optionsMenu (actions triggered by clicks on buttons).
  * @param e
  *  An event
  * @note
@@ -25,9 +25,12 @@
  *  (4) close more menu
 */
 document.addEventListener('click', function(e){
+    //open extensions page
     if( e.target.id == "bib_bar_BottomContainer_LeftMenu_ExtensionsButton" ||
         e.target.id == "bib_bar_BottomContainer_LeftMenu_ExtensionIcon")
         openExtensionsPage();
+
+    //open 'more'menu
     if( e.target.id == "bib_bar_BottomContainer_LeftMenu_MoreButton" ||
         e.target.id == "bib_bar_BottomContainer_LeftMenu_MoreIcon")
         openMoreMenu();
@@ -149,6 +152,7 @@ async function loadHintMessage() {
     let hintMessage = "Data not available";
 
     for (const [domain, message] of Object.entries(messages)) {
+        console.log(`currentUrl ${currentUrl}, domain: ${domain}.`);
         if (currentUrl.includes(domain)) {
             hintMessage = message;
             break;

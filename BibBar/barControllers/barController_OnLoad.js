@@ -8,7 +8,7 @@
 *   (3) _THIS_TAB_ID is a global variable that stores the id of the web page for each tab
 *   (4) _THIS_BAR is a global variable that stores  the extensions bar HTML node
 *
-* @author Manuel Mares
+* @author Manuel Mares, Xindi Zheng
 *
 ******************************************************************************/
 let _SEARCH_BAR                                 = null;
@@ -16,7 +16,6 @@ let _FULL_SCREEN_TOGGLE                         = false;
 let _THIS_TAB_ID                                = null;
 let _THIS_BAR                                   = null;
 let _THIS_URL                                   = null;
-let _SHOW_BAR_ADDRESS                           = 1                     //0 no address, 1 full domain, 2 qualified domain
 let _USE_TIMER                                  = false;
 const _CLOSE_TAB_TIME_IN_SECONDS_               = 15;                   //If you want the tabs to close after certain time, just indicate the time in seconds here
 const _NO_PIN_HOSTS                             = [ ]                   //Might nor be fully working yet
@@ -53,15 +52,21 @@ window.onload = async function () {
         }
     })
 
-    //Close the time after (time in seconds, websites to not to close)
-    //This funciton depend on _THIS_TAB_ID having a value (assigned at bib bar creation in barController_creator.js)
+    /* 
+      THE FUNCTIONS AFTER THIS POINT WORK OVER THE BIB BAR, MEANING THEY CANNOT BE EXECUTED BEFORE BECAUSE THEY RELY ON THE HTML BEING LOADED.
+      While using asyncQuery() guarantees the existence of the object, it is better to execute it after this point so there is not waiting time.
+    */
+
+    //Close the tab after (time in seconds, websites to not to close)
+    //This function depend on _THIS_TAB_ID having a value (assigned at bib bar creation in barController_creator.js)
     //Therefore, this has to occur after the search bar is loaded
     startTimerForTab(_CLOSE_TAB_TIME_IN_SECONDS_, _TABS_NO_CLOSE_AFTER_TIME_)
 
     //make a wait here
-    //turn bimi on
-    
-    retrieveAndDisplayLogo();
+    //turn bimi on    
+    toBackground_GetPageValidatorStatus()
+    .then(show_page_validator => {
+  })
 
     //fullScreen
     var buttonFullScreen = document.getElementById("bib_Bar_TopContainer_WindowControls_ExitFullScreen");
@@ -69,9 +74,33 @@ window.onload = async function () {
         _FULL_SCREEN_TOGGLE = !_FULL_SCREEN_TOGGLE;
         setFullScreen();
     }) 
-    
+}
 
+/**
+* In charge of hidding of displaying the two buttons for BIMI and Web Traffic.
+* @param show_page_validator
+*   an integer
+*/
+function displayBimiAndWebTraffic(show_page_validator){
+  if(show_page_validator == 0){
+    //show only BIMI
+    retrieveAndDisplayLogo();                                           //retrieves BIMI information
+    removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_HintButton');     //hides web traffic
+  }
+  if(show_page_validator == 1){
+    //show only web traffic
+    removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_circularLogo');   //hides bimi button
+  }
+  if(show_page_validator == 2){
+    //show BIMI and Web Traffic   
+    retrieveAndDisplayLogo();                                           //retrieves BIMI information
 
+  }
+  if(show_page_validator == 3){
+    //show none
+    removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_circularLogo');   //hides bimi button
+    removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_HintButton');     //hides web traffic
+  }
 }
 
 
@@ -91,83 +120,6 @@ function setTabId(){
 }
 
 /*
-Updates the url of the interface based on a given parameter
-@param show_bar_address
-    The status of the bar that indicates the new url
-@precondition:
-    _SHOW_BAR_ADDRESS has been modified
-@postconditions
-    The interface is updated showing a new url
-*/
-function updateURL(show_bar_address){
-    //Cleans the url
-    _THIS_URL = null;
-
-    //case 0. show_bar_address == 0, show nothing
-    if(show_bar_address == 0)   _THIS_URL = "";
-    //case 1. show_bar_address == 1, show full url
-    if(show_bar_address == 1)   _THIS_URL = window.location.href;
-    //case 2. show_bar_address == 2, show qualified domain
-    if(show_bar_address == 2)   _THIS_URL = concatenateURL();
-
-    //display the url
-    displayURL();
-}
-/*
-Updates the url of the interface based on the global variable _SHOW_BAR_ADDRESS
-@precondition:
-    _SHOW_BAR_ADDRESS has been modified
-@postconditions
-    The interface is updated showing a new url
-*/
-function updateURL(){
-    //Cleans the url
-    _THIS_URL = null;
-
-    //case 0. show_bar_address == 0, show nothing
-    if(_SHOW_BAR_ADDRESS == 0)   _THIS_URL = "";
-    //case 1. show_bar_address == 1, show full url
-    if(_SHOW_BAR_ADDRESS == 1)   _THIS_URL = window.location.href;
-    //case 2. show_bar_address == 2, show qualified domain
-    if(_SHOW_BAR_ADDRESS == 2)   _THIS_URL = concatenateURL();
-
-    //display the url
-    displayURL();
-}
-
-/*
-Controller for hot keys
-*/
-function hotKeysHandler(){
-    document.addEventListener('keydown', function(event) {
-        /*
-        This hotkey ctrl + b controls the url that is being displayed
-        0 - displays no url
-        1 - displays the full url
-        2 - displays only the qualified domain
-        */
-        if (event.ctrlKey && event.key === "b") {
-            setDisplayBarStatus()
-            .then((ans) => {
-                //Updates the url
-                updateURL(ans)
-                //Inform the user
-                if(_SHOW_BAR_ADDRESS == 0)
-                    alert(`_SHOW_BAR_ADDRESS updates. Displaying NO URL`);
-                if(_SHOW_BAR_ADDRESS == 1)
-                    alert(`_SHOW_BAR_ADDRESS updates. Displaying NO FULL URL`);
-                if(_SHOW_BAR_ADDRESS == 2)
-                    alert(`_SHOW_BAR_ADDRESS updates. Displaying ONLY QUALIFIED DOMAIN`);
-            })
-        }
-
-    }, true);
-}
-
-
-
-
-/*
     Pins tabs to the browser, except the indicated ones
 
     This function checks for the current pinned tabs in the browser, and when a match is found, 
@@ -185,201 +137,6 @@ function ExcludedTabsFromPin(domains){
 
 
 
-/*========================Utility functions========================*/
-
-/**
- * Gets a HTML file as a String
- * @param htmlDir
- *    A String with the location of the HTML file to retrieve
- * @returns String
- *    the html that will be set as the node.innerHTML +=
- *    of a DOM Node
- * @note
- *  1)The return value IS NOT a Node.
- *    it cannot be added with element.append()
- *  2)Returning a Node in this function would mean
- *    to add a intermedian wrapper
- *    whose style would cause more trouble
-*/
-async function getHTMLElement(htmlDir){
-  return fetch(chrome.runtime.getURL(htmlDir))
-        .then((resp) => { return resp.text(); })
-        .then((content) => { 
-            console.log("we are printing: ", htmlDir)
-            content = content.replaceAll("BIB_EXTENSION_ID", BIB_EXTENSION_ID);
-            return  content;
-        });
-}
-
-/**
- * Gets a style HTML Node to add into a HTML file
- * @param cssDir
- *    A String with the location of the CSS file to retrieve
- * @returns HTML Node
- *    A tag to be added to an HTML file, and containing the respective styles
- * @note
- *  1)This object, unlike the return object from getHTMLElement
- *    CAN return a HTML Node because the intermedian wraper
- *    is not a node to display or style
- *    in fact, it is a <style> tag that is always what we look for
- *  2)The styles are added as inline stylesheet because the chrome extension
- *    does not admit a reference to any css file
- *  3)Because of (2), the styles will show in the DOM. The shadow root 
- *    technique does not work in the chrome extension
- */
-async function getCSS(cssDir){
-  var style = document.createElement( 'style' );
-  style.innerHTML = await fetch(chrome.runtime.getURL(cssDir))
-                          .then((resp) => { return resp.text(); })
-                          .then((content) => { return  content; });
-  return style;
-}
-
-
-/**
- * Retrieves a JSON file
- * @param fileDir
- *    A String with the location of the JSON file to retrieve
- * @returns 
- *    A JSON file
- */
-async function getJson(fileDir){
-    return fetch(chrome.runtime.getURL(fileDir))
-    .then((resp) => resp.json())
-    .then(function (contentJSON) {
-        //console.log(contentJSON);
-        return contentJSON;
-    });
-}
-
-
-/**
- * retrieves the _SHOW_BAR_ADDRESS variable
- * @returns 
- *    A  string as a promise
- */
-function getDisplayBarStatus(){
-    return new Promise((resolve, reject) => {
-      chrome.runtime.sendMessage(
-        {
-            tabId: _THIS_TAB_ID,
-            type: "barController_OnLoad_get_SHOW_BAR_ADDRESS"
-        },
-        function (show_bar_address) 
-        {
-            _SHOW_BAR_ADDRESS = show_bar_address;
-            console.log(show_bar_address)
-            resolve( show_bar_address );
-            reject(ans => {console.log("reject: ", ans)})
-        }
-      )
-    })
-}
-/**
- * Changes the _SHOW_BAR_ADDRESS variable status
- * @returns 
- *    A String as a promise
- */
-function setDisplayBarStatus(){
-    return new Promise((resolve, reject) => {
-      chrome.runtime.sendMessage(
-        {
-            tabId: _THIS_TAB_ID,
-            type: "barController_OnLoad_set_SHOW_BAR_ADDRESS"
-        },
-        function (show_bar_address) 
-        {
-            _SHOW_BAR_ADDRESS = show_bar_address;
-            resolve( show_bar_address );
-            reject(ans => {console.log("reject: ", ans)})
-        }
-      )
-    })
-}
-
-
-
-/**
- * Returns the url of the current tab
- * @returns 
- *    A String
- */
-function getTabURL(){
-    return new Promise((resolve, reject) => {
-      chrome.runtime.sendMessage(
-        {
-            tabId: _THIS_TAB_ID,
-            type: "barController_getURL"
-        },
-        function (tabURL) 
-        {
-            resolve( tabURL );
-            reject(ans => {console.log("reject: ", ans)})
-        }
-      )
-    })
-}
-  
-/**
- * Returns the url of the current tab
- * @param tabId
- *   An integer with the id of the tab to check for
- * @returns 
- *    A String
- */
-function getTabURL(tabId){
-    return new Promise((resolve, reject) => {
-      chrome.runtime.sendMessage(
-        {
-            tabId: tabId,
-            type: "barController_getURL"
-        },
-        function (tabURL) 
-        {
-            resolve( tabURL );
-            reject(ans => {console.log("reject: ", ans)})
-        }
-      )
-    })
-}
-  
-/*
-    Starts the timer for to close tabs out of the safe list
-    @param timeInSeconds
-        An integer indicating the time to wait before closing the tab, in seconds
-    @param excludedTabsHostName
-        The tabs for which the timer will not be started. These tabs will not automatically close
-    @note
-        The timer is set in the background to preserve the status even after refreshing the tab.
-
-*/
-function startTimerForTab(timeInSeconds, excludedTabsHostName){
-    if(!_USE_TIMER)
-        return;
-
-    //If the hostname is in the list of safe tabs, don't start the counter
-    for(var i = 0; i < excludedTabsHostName.length; i++){
-        hostname = excludedTabsHostName[i];
-        if(location.hostname.localeCompare(hostname) == 0)
-            return;
-    }
-
-    //else, start the counter in background to preserve the status of the time
-    return new Promise((resolve, reject) => {
-        chrome.runtime.sendMessage(
-        {
-            tabId: _THIS_TAB_ID,
-            delayInSeconds: timeInSeconds,
-            type: "barController_timer"
-        },
-        function (tabURL) 
-        {
-            resolve()
-            reject(ans => {console.log("reject: ", ans)})
-        }
-        )
-    })
-}
 
 
 
@@ -483,7 +240,7 @@ function retrieveAndDisplayLogo() {
           let logo = data.Answer[0].data.split(";")[1].trim().slice(2);
           showLogotype(logo, domain);
         } else {
-          const circularLogo = document.getElementById("circular-logo");
+          const circularLogo = document.getElementById("bib_bar_BottomContainer_LeftMenu_circularLogo");
           circularLogo.className = "hidden";
         }
       })
@@ -496,7 +253,7 @@ function retrieveAndDisplayLogo() {
     Display the logo in a div on the webpage
   */
   function showLogotype(svg, domain) {
-    const circularLogo = document.getElementById("circular-logo");
+    const circularLogo = document.getElementById("bib_bar_BottomContainer_LeftMenu_circularLogo");
     console.log(svg);
     if (!svg || svg.trim() === "") {
       if (circularLogo) {
@@ -510,51 +267,51 @@ function retrieveAndDisplayLogo() {
       circularLogo.style.display = "block";
     } else {
       const logoContainer = document.createElement("div");
-      logoContainer.className = "circular-logo";
-      logoContainer.id = "circular-logo";
+      logoContainer.className = "bib_bar_BottomContainer_LeftMenu_circularLogo";
+      logoContainer.id = "bib_bar_BottomContainer_LeftMenu_circularLogo";
       document.body.appendChild(logoContainer);
     }
   
-    const logoContainer = document.getElementById("circular-logo");
+    const logoContainer = document.getElementById("bib_bar_BottomContainer_LeftMenu_circularLogo");
     logoContainer.innerHTML = `
       <img src="${svg}" alt="${domain} logo" style="max-width: 50px; height: auto; border-radius: 50%; border: 2px solid green;">
     `;
   }
   
-  /*
-    Function to extract the root domain from a URL
-  */
-  function extractHostname(url) {
-    var hostname;
-    //find & remove protocol (http, ftp, etc.) and get hostname
-  
-    if (url.indexOf("//") > -1) {
-      hostname = url.split("/")[2];
-    } else {
-      hostname = url.split("/")[0];
-    }
-  
-    //find & remove port number
-    hostname = hostname.split(":")[0];
-    //find & remove "?"
-    hostname = hostname.split("?")[0];
-  
-    return hostname;
+/*
+  Function to extract the root domain from a URL
+*/
+function extractHostname(url) {
+  var hostname;
+  //find & remove protocol (http, ftp, etc.) and get hostname
+
+  if (url.indexOf("//") > -1) {
+    hostname = url.split("/")[2];
+  } else {
+    hostname = url.split("/")[0];
   }
-  function extractRootDomain(url) {
-    var domain = extractHostname(url),
-      splitArr = domain.split("."),
-      arrLen = splitArr.length;
-  
-    //extracting the root domain here
-    //if there is a subdomain
-    if (arrLen > 2) {
-      domain = splitArr[arrLen - 2] + "." + splitArr[arrLen - 1];
-      //check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")
-      if (splitArr[arrLen - 2].length == 2 && splitArr[arrLen - 1].length == 2) {
-        //this is using a ccTLD
-        domain = splitArr[arrLen - 3] + "." + domain;
-      }
+
+  //find & remove port number
+  hostname = hostname.split(":")[0];
+  //find & remove "?"
+  hostname = hostname.split("?")[0];
+
+  return hostname;
+}
+function extractRootDomain(url) {
+  var domain = extractHostname(url),
+    splitArr = domain.split("."),
+    arrLen = splitArr.length;
+
+  //extracting the root domain here
+  //if there is a subdomain
+  if (arrLen > 2) {
+    domain = splitArr[arrLen - 2] + "." + splitArr[arrLen - 1];
+    //check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")
+    if (splitArr[arrLen - 2].length == 2 && splitArr[arrLen - 1].length == 2) {
+      //this is using a ccTLD
+      domain = splitArr[arrLen - 3] + "." + domain;
     }
-    return domain;
   }
+  return domain;
+}

@@ -5,6 +5,8 @@ render area
 
 
 # About this version
+- BIMI page verificator and and Website Traffic Reporter.
+
 - Pinning tabs. 
 CAREFUL! This function does not allows you to pin or unpin tabs in the extension. Instead, when you load your tabs, 
 use the actual browser to pin your tabs. All the pinned tabs will appear as such in the extension, but again, 
@@ -24,7 +26,6 @@ To modify the list of pages that are excluded from the timer, modify the list of
 This functionality hides the 'x' button from the tabs in selected hostnames.
 Update the list of pages with this feature in barController_OnLoad > _URLS_NO_CLOSE_BUTTON_
 
- 
 
 - Change URL version. The 'ctrl + b' shortcut controls the url that is being displayed
 
@@ -36,10 +37,19 @@ Update the list of pages with this feature in barController_OnLoad > _URLS_NO_CL
 
 To change the combination (only 'ctrl + someKey' allowed at the moment), modify the line of barController_OnLoad where it says 'event.key === "b"' for something like 'event.key === "k"'. This command is case sensitive, and might interfere with other commands from the browser. Be careful when choosing hotkeys.
 
-
 ## How to add images
 
 All the images must be referenced starting from src='chrome-extension://BIB_EXTENSION_ID/'
 Either you are using an HTML template or dynamically loading an image, make sure they start with that string.
 In case it is in a template, 'BIB_EXTENSION_ID' is the literal string. It will be replaced later automatically.
-In case it is loaded dynamically, BIB_EXTENSION_ID is a global variable, and it must be concatenated: `chrome-extension://${BIB_EXTENSION_ID}/...`
+In case it is loaded dynamically, BIB_EXTENSION_ID is a global variable, and it must be concatenated: `chrome-extension://${BIB_EXTENSION_ID}/...`.
+
+## How to Add Changes Over One Specific tab
+
+This is the default behavior in chrome extensions. Creating a global variable will also only persist on individual tabs. So any change made over any barController script will activated per script.
+
+## How to Add Changes That Affect Multiple Tabs (and How to Communicate Tabs)
+
+All tabs get their own copy of the extension's scripts, and execute their own copy in their own sandbox. However, all the tabs share the background.js. You can send promises from the
+barController scripts and back. This is not trivial. There is a non bug that makes the use of promises obligatory. So check scripts to see how they communicate with background.js to send
+and receive information. Any Global variable set in background.js is a variable that all tabs can have access to (but need to manually retrieved) with the same value.

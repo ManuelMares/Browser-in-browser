@@ -1,35 +1,36 @@
 {
     "manifest_version": 3,
-    "name": "Browser-in-Browser",
-    "description": "Base Level Extension",
+    "name": "fractal",
+    "description": "Fractal Extension",
     "version": "1.0",
     "action": {
       "default_popup": "popup.html",
-      "default_title": "Browser-in-browser",
+      "default_title": "fractal",
       "default_icon": {
-        "16": "icons/icon16.png",
-        "32": "icons/icon32.png",
-        "48": "icons/icon48.png",
-        "64": "icons/icon64.png",
-        "128": "icons/icon128.png"
+        "16": "icons/fractal.png",
+        "32": "icons/fractal.png",
+        "48": "icons/fractal.png",
+        "64": "icons/fractal.png",
+        "128": "icons/fractal.png"
       }
     },
     "icons": {
-      "16": "icons/icon16.png",
-      "32": "icons/icon32.png",
-      "48": "icons/icon48.png",
-      "64": "icons/icon64.png",
-      "128": "icons/icon128.png"
+      "16": "icons/fractal.png",
+      "32": "icons/fractal.png",
+      "48": "icons/fractal.png",
+      "64": "icons/fractal.png",
+      "128": "icons/fractal.png"
     },  
     "permissions": ["storage", "activeTab", "scripting", "tabs", "bookmarks"],
     "background": {"service_worker": "background.js"},
     "content_scripts":[
         {
             "css": ["BibBar/bar.css"],
-            "js": [ "BibBar/barControllers/barController_OnLoad.js",            "BibBar/barControllers/barController_relocateBar.js",
+            "js": [ "BibBar/barControllers/barController_OnLoad.js",            "BibBar/barControllers/barController_UtilityFunctions.js",
                     "BibBar/barControllers/barController_creator.js",           "BibBar/barControllers/barController_tabs.js", 
                     "BibBar/barControllers/barController_historyButtons.js",    "BibBar/barControllers/barController_searchBar.js", 
                     "BibBar/barControllers/barController_optionsMenu.js",       "BibBar/barControllers/barController_fullScreen.js",
+                    "BibBar/barControllers/barController_HotKeys.js",           "BibBar/barControllers/barController_relocateBar.js",
                     "BibBar/barControllers/barController_windowControls.js"
                   ],
             "matches": ["*://*/*"], 
@@ -37,7 +38,7 @@
         }
     ],
     "web_accessible_resources": [{
-        "resources" : [ "BibBar/bar.html", "BibBar/bar.css", "icons/icon32.png",
+        "resources" : [ "BibBar/bar.html", "BibBar/bar.css", "icons/icon32.png", "icons/fractal.png",
                         "BibBar/Components/activeTab.html", "BibBar/Components/inactiveTab.html", "BibBar/Components/tab.css",
                         "BibBar/Components/activeTab_pinned.html", "BibBar/Components/inactiveTab_pinned.html",
                         "BibBar/Icons/no-favicon.svg", "BibBar/barController/barController_tabs.js",
