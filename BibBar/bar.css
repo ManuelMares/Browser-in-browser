@@ -31,7 +31,31 @@
    
 }
 
+.circular-logo {
+    display: none;
+    width: 30px; /* Adjust the size as needed */
+    height: 30px; /* Adjust the size as needed */
+    border-radius: 50%;
+    background-color: #f6f6f4e3; /* Set the background color you want */
+    margin-right: 5px; /* Adjust the margin as needed */
+  }
 
+  .hover-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    padding: 10px;
+    border: 1px solid #099f13;
+    border-radius: 5px;
+    z-index: 1;
+    top: 10%; /* Position the content below the circular logo with 100px padding */
+    left: 10%; /* Adjust the left position to 100px */
+  }
+  
+  .circular-logo:hover + .hover-content {
+    display: block;
+  }
 
 /* THIS SECTION SETS THE TOP PART OF THE BAR, WHICH CONTAINS THE TABS */
     .bib_Bar_TopContainer{

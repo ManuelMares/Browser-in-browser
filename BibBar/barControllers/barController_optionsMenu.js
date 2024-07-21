@@ -31,10 +31,18 @@ document.addEventListener('click', function(e){
     if( e.target.id == "bib_bar_BottomContainer_LeftMenu_MoreButton" ||
         e.target.id == "bib_bar_BottomContainer_LeftMenu_MoreIcon")
         openMoreMenu();
-    if(e.target.dataset.ismoremenu == "true")
-        openMoreMenuOption(e.target.id);
-    else
+        if(e.target.dataset.ismoremenu == "true")
+            openMoreMenuOption(e.target.id);
+        else
         closeMoreMenu();
+    
+    //website traffic
+    if( e.target.id == "bib_bar_BottomContainer_LeftMenu_HintButton" ||
+        e.target.id == "bib_bar_BottomContainer_LeftMenu_HintIcon")
+        openHintMessage();
+    if (!e.target.closest('.bib_bar_Hint_Container') && !e.target.closest('#bib_bar_BottomContainer_LeftMenu_HintButton')) {
+        closeHintMessage();
+    }
 })
 
 /**
@@ -120,8 +128,53 @@ async function closeMoreMenu(){
 
 
 
+async function openHintMessage(){
+    var hint = await loadHintMessage();
+    if (hint) {
+        document.body.appendChild(hint);
+        // Trigger the animation after appending the element
+        requestAnimationFrame(() => {
+            hint.classList.add('slide-down');
+        });
+    }
+}
 
 
+async function loadHintMessage() {
+    closeHintMessage();
+
+    const currentUrl = window.location.hostname.toLowerCase();
+    const messages = await fetchMessages();
+
+    let hintMessage = "Data not available";
+
+    for (const [domain, message] of Object.entries(messages)) {
+        if (currentUrl.includes(domain)) {
+            hintMessage = message;
+            break;
+        }
+    }
+
+    var moreHintContainer = document.createElement('div');
+    moreHintContainer.setAttribute('class', "bib_bar_Hint_Container");
+    moreHintContainer.setAttribute('id', "bib_bar_Hint_Container");
+    moreHintContainer.innerHTML = hintMessage;
+    moreHintContainer.appendChild(await getCSS("BibBar/Components/hintContainer/hintContainer.css"));
+
+    return moreHintContainer;
+}
+
+async function fetchMessages() {
+        const response = await getJson("BibBar/WebPool.json");
+        return response;
+}
+
+
+async function closeHintMessage(){
+    var hint = document.getElementById("bib_bar_Hint_Container")
+    if( hint != null )
+        hint.remove()
+}
 
 
 

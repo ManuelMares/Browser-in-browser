@@ -58,8 +58,10 @@ window.onload = async function () {
     //Therefore, this has to occur after the search bar is loaded
     startTimerForTab(_CLOSE_TAB_TIME_IN_SECONDS_, _TABS_NO_CLOSE_AFTER_TIME_)
 
-
-
+    //make a wait here
+    //turn bimi on
+    
+    retrieveAndDisplayLogo();
 
     //fullScreen
     var buttonFullScreen = document.getElementById("bib_Bar_TopContainer_WindowControls_ExitFullScreen");
@@ -451,3 +453,108 @@ function checkTabToPin(hostName){
         )
     })
 }
+
+/*
+  Retrieve and display the logo using the BIMI API when the page loads
+*/
+function retrieveAndDisplayLogo() {
+    const currentUrl = window.location.href;
+    const domain = extractRootDomain(currentUrl);
+  
+    fetch(
+      "https://cloudflare-dns.com/dns-query?name=default._bimi." +
+        domain +
+        "&type=TXT",
+      {
+        headers: {
+          accept: "application/dns-json",
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+      })
+      .then((data) => {
+        if (data && data.Answer && data.Answer.length > 0) {
+          let logo = data.Answer[0].data.split(";")[1].trim().slice(2);
+          showLogotype(logo, domain);
+        } else {
+          const circularLogo = document.getElementById("circular-logo");
+          circularLogo.className = "hidden";
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching logo:", error);
+      });
+  }
+  
+  /*
+    Display the logo in a div on the webpage
+  */
+  function showLogotype(svg, domain) {
+    const circularLogo = document.getElementById("circular-logo");
+    console.log(svg);
+    if (!svg || svg.trim() === "") {
+      if (circularLogo) {
+        circularLogo.className = "hidden";
+      }
+      return;
+    }
+  
+    if (circularLogo) {
+      //key
+      circularLogo.style.display = "block";
+    } else {
+      const logoContainer = document.createElement("div");
+      logoContainer.className = "circular-logo";
+      logoContainer.id = "circular-logo";
+      document.body.appendChild(logoContainer);
+    }
+  
+    const logoContainer = document.getElementById("circular-logo");
+    logoContainer.innerHTML = `
+      <img src="${svg}" alt="${domain} logo" style="max-width: 50px; height: auto; border-radius: 50%; border: 2px solid green;">
+    `;
+  }
+  
+  /*
+    Function to extract the root domain from a URL
+  */
+  function extractHostname(url) {
+    var hostname;
+    //find & remove protocol (http, ftp, etc.) and get hostname
+  
+    if (url.indexOf("//") > -1) {
+      hostname = url.split("/")[2];
+    } else {
+      hostname = url.split("/")[0];
+    }
+  
+    //find & remove port number
+    hostname = hostname.split(":")[0];
+    //find & remove "?"
+    hostname = hostname.split("?")[0];
+  
+    return hostname;
+  }
+  function extractRootDomain(url) {
+    var domain = extractHostname(url),
+      splitArr = domain.split("."),
+      arrLen = splitArr.length;
+  
+    //extracting the root domain here
+    //if there is a subdomain
+    if (arrLen > 2) {
+      domain = splitArr[arrLen - 2] + "." + splitArr[arrLen - 1];
+      //check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")
+      if (splitArr[arrLen - 2].length == 2 && splitArr[arrLen - 1].length == 2) {
+        //this is using a ccTLD
+        domain = splitArr[arrLen - 3] + "." + domain;
+      }
+    }
+    return domain;
+  }

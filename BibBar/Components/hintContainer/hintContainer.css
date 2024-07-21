@@ -1,0 +1,23 @@
+.bib_bar_Hint_Container{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;    
+    width: 200px;
+    height: auto;
+    background-color: white;
+    
+    position: fixed;
+    top: 100px;
+    z-index: 15000;
+    right: 0;
+
+    padding: 5px 0 5px 50px;
+    border: 1px solid #aa070a;
+
+    transition: top 0.5s ease-out;
+
+}
+
+.bib_bar_Hint_Container.slide-down {
+    top: 80px;  /* Slide down to the top of the screen */
+}
