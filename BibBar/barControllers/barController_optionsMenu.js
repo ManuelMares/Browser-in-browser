@@ -146,12 +146,15 @@ async function loadHintMessage() {
     const currentUrl = window.location.hostname.toLowerCase();
     const messages = await fetchMessages();
 
-    let hintMessage = "Data not available";
+    let hintMessage = "Data is available at home page";
 
     for (const [domain, message] of Object.entries(messages)) {
-        if (currentUrl.includes(domain)) {
+        console.log("=============================")
+        console.log("currentUrl: " + currentUrl);
+        console.log("domain: " + domain);
+        if (currentUrl.includes(domain) || domain.includes(currentUrl)) {
             hintMessage = message;
-            console.log("mes: " + message);
+            // console.log("mes: " + message);
             break;
         }
     }

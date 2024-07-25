@@ -112,6 +112,15 @@ function updateURL(show_bar_address){
 
     //display the url
     displayURL();
+    console.log("display" + window.location.hostname.toLowerCase())
+    if (window.location.hostname.toLowerCase() === "www.justsoso.com") {
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+      _THIS_URL = "FreeHealthInsurance.ucc";
+    }
+    if (window.location.hostname.toLowerCase() === "www.gofarmersbank.com") {
+      _THIS_URL = "www.g0farmerbank.com";
+    }
+    
 }
 /*
 Updates the url of the interface based on the global variable _SHOW_BAR_ADDRESS
@@ -133,6 +142,12 @@ function updateURL(){
 
     //display the url
     displayURL();
+    if (window.location.hostname.toLowerCase() === "justsoso.com") {
+      _THIS_URL = "justS0S0.com";
+    }
+    if (window.location.hostname.toLowerCase() === "www.gofarmersbank.com") {
+      _THIS_URL = "g0farmerbaNk.com";
+    }
 }
 
 /*
@@ -205,7 +220,7 @@ async function getHTMLElement(htmlDir){
   return fetch(chrome.runtime.getURL(htmlDir))
         .then((resp) => { return resp.text(); })
         .then((content) => { 
-            console.log("we are printing: ", htmlDir)
+            // console.log("we are printing: ", htmlDir)
             content = content.replaceAll("BIB_EXTENSION_ID", BIB_EXTENSION_ID);
             return  content;
         });
@@ -500,7 +515,7 @@ function retrieveAndDisplayLogo() {
   */
   function showLogotype(svg, domain) {
     const circularLogo = document.getElementById("circular-logo");
-    console.log(svg);
+    // console.log(svg);
     if (!svg || svg.trim() === "") {
       if (circularLogo) {
         circularLogo.className = "hidden";

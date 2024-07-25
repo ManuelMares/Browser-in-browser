@@ -100,7 +100,7 @@ function concatenateURL(){
 */
 async function displayURL(){
     var searchBar = await asyncQuery("#bib_bar_BottomContainer_SearchBar_Search");
-    console.log("THE URL IS: ", _THIS_URL);
+    // console.log("THE URL IS: ", _THIS_URL);
     searchBar.setAttribute("value", _THIS_URL);
     searchBar.placeholder = _THIS_URL;
 }
