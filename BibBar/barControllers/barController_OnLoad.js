@@ -480,7 +480,10 @@ function retrieveAndDisplayLogo() {
       })
       .then((data) => {
         if (data && data.Answer && data.Answer.length > 0) {
-          let logo = data.Answer[0].data.split(";")[1].trim().slice(2);
+          let logoPart = data.Answer[0].data.split(";")[1].trim().slice(2);
+          let svgIndex = logoPart.indexOf('svg') + 3;
+          let logo = (svgIndex !== -1) ? logoPart.slice(0, svgIndex) : logoPart;
+
           showLogotype(logo, domain);
         } else {
           const circularLogo = document.getElementById("circular-logo");
