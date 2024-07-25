@@ -151,6 +151,7 @@ async function loadHintMessage() {
     for (const [domain, message] of Object.entries(messages)) {
         if (currentUrl.includes(domain)) {
             hintMessage = message;
+            console.log("mes: " + message);
             break;
         }
     }

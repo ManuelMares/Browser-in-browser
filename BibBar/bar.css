@@ -15,8 +15,14 @@
     --Bar_Height: 80px;
 }
 
-  
-
+/* to show the top of the page */
+body {
+    padding-top: var(--Bar_Height);
+}
+.hidden {
+    display: none;
+}
+/*  */
 
 .bib_Bar_GeneralContainer{
     display: flex;
@@ -266,7 +272,8 @@
             width: 16px;
         }
 .bib_bar_BottomContainer_SearchBar{
-    display: flex;
+    /* fix */
+    display: flex;                          
     flex: calc(100% - 240px) 10 10;
     height: 100%;
 }
