@@ -34,6 +34,7 @@ async function createBar(){
   var customBar = document.createElement('div');
   customBar.setAttribute("class", "customBar");
   customBar.setAttribute("id", "customBar");
+  
   customBar.innerHTML = await getTextContent('Resources/Bar/bar.html');
   customBar.appendChild( await getCSS('Resources/Bar/bar.css') );   
   return customBar

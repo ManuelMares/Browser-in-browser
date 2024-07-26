@@ -38,7 +38,7 @@
         }
     ],
     "web_accessible_resources": [{
-        "resources" : [ "BibBar/bar.html", "BibBar/bar.css", "icons/icon32.png", "icons/fractal.png",
+        "resources" : [ "BibBar/bar.html", "BibBar/barWithMasterTabs.html", "BibBar/bar.css", "icons/icon32.png", "icons/fractal.png",
                         "BibBar/Components/activeTab.html", "BibBar/Components/inactiveTab.html", "BibBar/Components/tab.css",
                         "BibBar/Components/activeTab_pinned.html", "BibBar/Components/inactiveTab_pinned.html",
                         "BibBar/Icons/no-favicon.svg", "BibBar/barController/barController_tabs.js",

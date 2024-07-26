@@ -36,6 +36,14 @@ async function main(){
   //3) add tabs
   var tabs = await requestTabs()
   loadTabs(tabs);  
+
+  //4) update bar to delete navigation if this is a master tab
+  console.log(`we are here!:  ${_IS_MASTER === true}`)
+  if(_IS_MASTER === true){
+    document.getElementById("bib_bar_BottomContainer_LeftMenu_PreviousButton").style["visibility"] = "hidden";
+    document.getElementById("bib_bar_BottomContainer_LeftMenu_RefreshButton").style["visibility"] = "hidden";
+    document.getElementById("bib_bar_BottomContainer_LeftMenu_NextButton").style["visibility"] = "hidden";
+  }
 } 
 
 /**
@@ -248,6 +256,9 @@ async function createTab(tabsContainer, tab, index){
   var icon = tab["favIconUrl"]
   var statusActive = tab["active"];
   var isPinned = tab["pinned"];
+  if(isPinned && statusActive && tabId === _THIS_TAB_ID){
+    _IS_MASTER = _MAKE_PINNED_TABS_INTO_MASTER_TABS;
+  }
   var temporaryTab = document.createElement('div');
 
   var divisorBar = document.createElement('div');
@@ -277,6 +288,7 @@ async function createTab(tabsContainer, tab, index){
       temporaryTab.innerHTML = await getHTMLElement("BibBar/Components/inactiveTab.html")
     }
   }
+
 
 
   /*------------Sets the right attributes of the tab---------------*/
