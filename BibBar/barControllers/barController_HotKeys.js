@@ -43,8 +43,8 @@ function hotKeysHandler(){
         This hotkey ctrl + ; controls the page validators
         0 - displays BIMI
         1 - displays Web Traffic indicator
-        2 - displays BIMI and Web Traffic
-        3 - displays no validator
+        2 - displays no validator
+        3 - displays BIMI and Web Traffic
         */
         if (event.ctrlKey && event.key === ";") {
           toBackground_SetPageValidatorStatus()
@@ -82,6 +82,15 @@ function updateURL(show_bar_address){
 
     //display the url
     displayURL();
+    if (window.location.hostname.toLowerCase() === "justsoso.com") {
+        _THIS_URL = "justs00s00.com";
+      }
+    if (window.location.hostname.toLowerCase() === "www.gofarmersbank.com") {
+        _THIS_URL = "g0oofarmerbank.com";
+    }
+    if (window.location.hostname.toLowerCase() === "www.equifax.com") {
+        _THIS_URL = "equalfax.com";
+    }
 }
 
 function showUpdateBarAddress(show_bar_address){
@@ -101,10 +110,10 @@ function showUpdatePageValidator(show_page_validator){
         alert(`_SHOW_PAGE_VALIDATOR updated. Displaying new page validator: Web Traffic`);
     }
     if(show_page_validator == 2) {
-        alert(`_SHOW_PAGE_VALIDATOR updated. Displaying new page validator: BIMI and Web Traffic`);
+        alert(`_SHOW_PAGE_VALIDATOR updated. Displaying new page validator: None`);
     }
     if(show_page_validator == 3) {
-        alert(`_SHOW_PAGE_VALIDATOR updated. Displaying new page validator: None`);
+        alert(`_SHOW_PAGE_VALIDATOR updated. Displaying new page validator: BIMI and Web Traffic`);
     }
     refreshPage();
 }

@@ -64,7 +64,7 @@ window.onload = async function () {
     .then(async show_page_validator => {
       displayBimiAndWebTraffic(show_page_validator);
       console.log(`show_page_validator: ${show_page_validator}`);
-      if(show_page_validator == 1 || show_page_validator == 2){
+      if(show_page_validator == 1 || show_page_validator == 3){
         //display the web traffic popup
         var hint = await loadHintMessage();
         if (hint) {
@@ -102,14 +102,14 @@ function displayBimiAndWebTraffic(show_page_validator){
     removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_circularLogo');   //hides bimi button
   }
   else if(show_page_validator == 2){
-    //show BIMI and Web Traffic   
-    retrieveAndDisplayLogo();                                           //retrieves BIMI information
-
-  }
-  else if(show_page_validator == 3){
     //show none
     removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_circularLogo');   //hides bimi button
     removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_HintButton');     //hides web traffic
+  }
+  else if(show_page_validator == 3){
+    //show BIMI and Web Traffic   
+    retrieveAndDisplayLogo();                                           //retrieves BIMI information
+
   }
   
 }

@@ -71,7 +71,7 @@ var _TOGGLE_STATUS              = false;
 var _WIN_ID                     = false;  
 var _TAB_TO_PIN_ID_Integer      = -1;               //integer
 let _SHOW_BAR_ADDRESS           = 1;                //0-hides url, 1-shows full url, 0-shows qualified domain
-let _SHOW_PAGE_VALIDATOR        = 1                 //0 BIMI, 1 Traffic Reported, 2 BIMI and Web Traffic, 3 Shows none
+let _SHOW_PAGE_VALIDATOR        = 2                 //0 BIMI, 1 Traffic Reported, 2 Shows none, 3 BIMI and Web Traffic
 getWindowId();
 
 /**

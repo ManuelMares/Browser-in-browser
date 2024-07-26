@@ -15,7 +15,14 @@
     --Bar_Height: 80px;
 }
 
-  
+/* to show the top of the page */
+body {
+    padding-top: var(--Bar_Height);
+}
+.hidden {
+    display: none;
+}
+/*  */
 
 
 .bib_Bar_GeneralContainer{

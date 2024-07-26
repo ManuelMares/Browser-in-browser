@@ -1,6 +1,15 @@
 {
     "www.chase.com": "<strong>Recent Traffic:</strong>  April: 31805834 <br> May: 31872347 <br> June: 31947476",
-    "www.bankofamerica.com":   "<strong>Recent Traffic:</strong>  April: 25235 <br> May: 375735 <br> June: 87985",
-    "www.google.com":  "<strong>Recent Traffic:</strong> Data not available"
+    "www.ft.com":  "<strong>Recent Traffic:</strong> April: 9073076 <br> May: 6844642 <br> June: 6635989",
+    "www.asos.com":  "<strong>Recent Traffic:</strong> April: 23217011 <br> May: 21790392 <br> June: 20298187",
+    "www.bankofamerica.com":   "<strong>Recent Traffic:</strong>  April: 221425235 <br> May: 245375735 <br> June: 231487985",
+    "www.warbyparker.com":  "<strong>Recent Traffic:</strong> April: 1851549 <br> May: 1894727 <br> June: 2018158",
+    
+    "www.lolaroseglobal.com":  "<strong>Recent Traffic:</strong> April: 48959 <br> May: 56669 <br> June: 58657",
+    "www.equifax.com":  "<strong>Recent Traffic:</strong> April: 50086 <br> May: 38280 <br> June: 41706",
+    "www.gofarmersbank.com":  "<strong>Recent Traffic:</strong>  April: 4870 <br> May: 4875 <br> June: 5090",
+    "www.justsoso.com":  "<strong>Recent Traffic:</strong> April: 2793 <br> May: 1975 <br> June: 2319",
+
+    "https://script.google.com/macros/s/AKfycbyJurfmkYwtz6Tbx-1jbVFLRTbgRCb8s-P1I0drwyI/dev?page=webs" : "Website Traffic HInt"
   }
   
