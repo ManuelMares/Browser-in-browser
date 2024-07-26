@@ -16,7 +16,7 @@
 * @author Manuel Mares, Xindi Zheng
 *
 ******************************************************************************/
-let _SHOW_BAR_ADDRESS                           = 1                     //0 no address, 1 full domain, 2 qualified domain
+let _SHOW_BAR_ADDRESS                           = 3                     //0 no address, 1 full domain, 2 qualified domain
 
 
 
@@ -44,7 +44,7 @@ function hotKeysHandler(){
         0 - displays BIMI
         1 - displays Web Traffic indicator
         2 - displays BIMI and Web Traffic
-        2 - displays no validator
+        3 - displays no validator
         */
         if (event.ctrlKey && event.key === ";") {
           toBackground_SetPageValidatorStatus()

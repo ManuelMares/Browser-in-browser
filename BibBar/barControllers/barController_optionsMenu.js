@@ -142,7 +142,11 @@ async function openHintMessage(){
     }
 }
 
-
+/**
+ * loads the HTML Node containing the more menu
+ * @return 
+ *  HTML Node
+*/
 async function loadHintMessage() {
     closeHintMessage();
 

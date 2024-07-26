@@ -65,8 +65,20 @@ window.onload = async function () {
     //make a wait here
     //turn bimi on    
     toBackground_GetPageValidatorStatus()
-    .then(show_page_validator => {
+    .then(async show_page_validator => {
       displayBimiAndWebTraffic(show_page_validator);
+      console.log(`show_page_validator: ${show_page_validator}`);
+      if(show_page_validator == 1 || show_page_validator == 2){
+        //display the web traffic popup
+        var hint = await loadHintMessage();
+        if (hint) {
+            document.body.appendChild(hint);
+            // Trigger the animation after appending the element
+            requestAnimationFrame(() => {
+                hint.classList.add('slide-down');
+            });
+        }
+      }
     })
 
     //fullScreen
@@ -75,6 +87,7 @@ window.onload = async function () {
         _FULL_SCREEN_TOGGLE = !_FULL_SCREEN_TOGGLE;
         setFullScreen();
     }) 
+
 }
 
 /**
@@ -83,27 +96,26 @@ window.onload = async function () {
 *   an integer
 */
 function displayBimiAndWebTraffic(show_page_validator){
-  console.log("Im here!!!!!!!!!!!!!!!!")
   if(show_page_validator == 0){
     //show only BIMI
     retrieveAndDisplayLogo();                                           //retrieves BIMI information
     removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_HintButton');     //hides web traffic
-    console.log("============================")
   }
-  if(show_page_validator == 1){
+  else if(show_page_validator == 1){
     //show only web traffic
     removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_circularLogo');   //hides bimi button
   }
-  if(show_page_validator == 2){
+  else if(show_page_validator == 2){
     //show BIMI and Web Traffic   
     retrieveAndDisplayLogo();                                           //retrieves BIMI information
 
   }
-  if(show_page_validator == 3){
+  else if(show_page_validator == 3){
     //show none
     removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_circularLogo');   //hides bimi button
     removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_HintButton');     //hides web traffic
   }
+  
 }
 
 
@@ -147,50 +159,7 @@ function ExcludedTabsFromPin(domains){
 // =====================================GENERIC FUNCTIONS =================================================
 // ========================================================================================================
 
-/* 
-This functions wait for a given amount of time before finalizing 
 
-This function returns a promise to garantee that the indicated time ocurred
-@param timeMs
-An integer indicating the time to wait for in ms
-*/
-const delay = (timeInMs) => {
-    return new Promise(resolve => {    
-        setTimeout(function() {
-          resolve();
-        }, timeInMs)
-    });
-  }
-  
-
-
-/* 
-This function waits until an HTML element exists, and returns it when that happens
-
-All process will stop until the element exists
-
-@param selector
-    A selector property from the element to wait for
-@return
-    A HTML Node
-*/
-function asyncQuery(selector) {
-    return new Promise(resolve => {
-        if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector));
-        }
-        const observer = new MutationObserver(mutations => {
-            if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector));
-                observer.disconnect();
-            }
-        });
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    });
-}
 
 
 /*

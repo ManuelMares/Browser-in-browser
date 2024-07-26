@@ -65,7 +65,12 @@ async function updateBar(){
     var tabs = await requestTabs();  
     cleanTabs()
     .then(ans => {
+  delay(2000)
       loadTabs(tabs);
+      
+      removeHTMLNode(".bib_bar_BottomContainer_LeftMenu_PreviousButton");
+      removeHTMLNode(".bib_bar_BottomContainer_LeftMenu_NextButton");
+      removeHTMLNode(".bib_bar_BottomContainer_LeftMenu_RefreshButton");
     })
     .then(ans => {
       resolve();
