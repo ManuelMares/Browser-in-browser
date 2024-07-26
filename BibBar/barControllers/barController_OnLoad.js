@@ -66,7 +66,8 @@ window.onload = async function () {
     //turn bimi on    
     toBackground_GetPageValidatorStatus()
     .then(show_page_validator => {
-  })
+      displayBimiAndWebTraffic(show_page_validator);
+    })
 
     //fullScreen
     var buttonFullScreen = document.getElementById("bib_Bar_TopContainer_WindowControls_ExitFullScreen");
@@ -77,15 +78,17 @@ window.onload = async function () {
 }
 
 /**
-* In charge of hidding of displaying the two buttons for BIMI and Web Traffic.
+* In charge of hiding of displaying the two buttons for BIMI and Web Traffic.
 * @param show_page_validator
 *   an integer
 */
 function displayBimiAndWebTraffic(show_page_validator){
+  console.log("Im here!!!!!!!!!!!!!!!!")
   if(show_page_validator == 0){
     //show only BIMI
     retrieveAndDisplayLogo();                                           //retrieves BIMI information
     removeHTMLNode('#bib_bar_BottomContainer_LeftMenu_HintButton');     //hides web traffic
+    console.log("============================")
   }
   if(show_page_validator == 1){
     //show only web traffic

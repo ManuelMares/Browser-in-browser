@@ -66,8 +66,14 @@ function conditionalUpload(){
 function getPageStylesFromJSON(JSONFile){
     return new Promise((resolve, reject) => {
         getTabURL()
-        .then(tabURL => { return searchInJSON(JSONFile, tabURL); })
+        .then(tabURL => { 
+            alert("we are here successfully!")
+            return searchInJSON(JSONFile, tabURL); 
+        })
         .then( JSONSection => { resolve(JSONSection) })
+        .catch(errorMessage =>{
+            alert(errorMessage);
+        })
     }) 
 }
 
