@@ -26,7 +26,9 @@
     "content_scripts":[
         {
             "css": ["BibBar/bar.css"],
-            "js": [ "BibBar/barControllers/barController_OnLoad.js",            "BibBar/barControllers/barController_UtilityFunctions.js",
+            "js": [  
+                    "settings.js",
+                    "BibBar/barControllers/barController_OnLoad.js",            "BibBar/barControllers/barController_UtilityFunctions.js",
                     "BibBar/barControllers/barController_creator.js",           "BibBar/barControllers/barController_tabs.js", 
                     "BibBar/barControllers/barController_historyButtons.js",    "BibBar/barControllers/barController_searchBar.js", 
                     "BibBar/barControllers/barController_optionsMenu.js",       "BibBar/barControllers/barController_fullScreen.js",
@@ -38,7 +40,8 @@
         }
     ],
     "web_accessible_resources": [{
-        "resources" : [ "BibBar/bar.html", "BibBar/barWithMasterTabs.html", "BibBar/bar.css", "icons/icon32.png", "icons/fractal.png",
+        "resources" : [ 
+                        "BibBar/bar.html", "BibBar/barWithMasterTabs.html", "BibBar/bar.css", "icons/icon32.png", "icons/fractal.png",
                         "BibBar/Components/activeTab.html", "BibBar/Components/inactiveTab.html", "BibBar/Components/tab.css",
                         "BibBar/Components/activeTab_pinned.html", "BibBar/Components/inactiveTab_pinned.html",
                         "BibBar/Icons/no-favicon.svg", "BibBar/barController/barController_tabs.js",
